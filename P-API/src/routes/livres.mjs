@@ -1,10 +1,11 @@
 import express from "express";
 import { livres } from "../db/mockup-datas.mjs";
 import { success, getUniqueId } from "./helper.mjs";
+import { livre } from "../db/sequelize.mjs";
 const livresRouter = express();
 
 livresRouter.get("/", (req, res) => {
-  livres.findAll()
+  livre.findAll()
     .then((livres) => {
       const message = "La liste des livres a bien été récupérée.";
       res.json(success(message, livres));
@@ -18,10 +19,21 @@ livresRouter.get("/", (req, res) => {
 export { livresRouter };
 
 livresRouter.get("/:id", (req, res) => {
-  const livreId = req.params.id;
-  const livre = livres.find((livre) => livre.id_livre == livreId);
-  const message = `Le livre dont l'id vaut ${livreId} a bien été récupéré.`;
-  res.json(success(message, livre));
+  livre.findByPk(req.params.id)
+    .then((livre) => {
+      if (livre === null) {
+        const message =
+          "Le livre demandé n'existe pas. merci de réessayer avec un autre identifiant.";
+        return res.status(404).json({ message });
+      }
+      const message = `Le livre dont l'id vaut ${livreId} a bien été récupéré.`
+      res.json(success(message, livre));
+    })
+    .catch((error) => {
+      const message =
+      "Le livre n'a pas pu être récupéré. merci de réessayer dans quelques instants.";
+    res.status(500).json({ message, data: error });
+  });
 });
 
 livresRouter.post("/", (req, res) => {
