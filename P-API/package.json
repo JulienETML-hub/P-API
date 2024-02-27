@@ -19,5 +19,9 @@
   "homepage": "https://github.com/JulienETML-hub/P-API#readme",
   "devDependencies": {
     "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "mysql2": "^3.9.2",
+    "sequelize": "^6.37.1"
   }
 }
