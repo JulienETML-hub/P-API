@@ -1,6 +1,6 @@
 let livres = [
   {
-    id_livre_livre:1,
+    id_livre:1,
     titre: "Anna Karénine",
     catégorie: "Roman réaliste",
     nombre_de_pages: 864,
@@ -18,7 +18,7 @@ let livres = [
     image_de_couverture: "chemin/vers/anna_karenine.jpg",
   },
   {
-    id_livre_livre:2,
+    id_livre:2,
     titre: "Le Procès",
     catégorie: "Roman philosophique",
     nombre_de_pages: 304,
