@@ -1,10 +1,11 @@
 {
   "name": "p-api",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon src/app.mjs"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/JulienETML-hub/P-API/issues"
   },
-  "homepage": "https://github.com/JulienETML-hub/P-API#readme"
+  "homepage": "https://github.com/JulienETML-hub/P-API#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
 }
