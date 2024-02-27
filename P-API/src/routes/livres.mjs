@@ -1,6 +1,6 @@
 import express from "express";
 import { livres } from "../db/mockup-datas.mjs";
-import { success } from "./helper.mjs";
+import { success, getUniqueId } from "./helper.mjs";
 const livresRouter = express();
 
 livresRouter.get("/", (req, res) => {
@@ -27,5 +27,34 @@ livresRouter.post("/", (req, res) => {
   // Définir un message pour le consommateur de l'API REST
   const message = `Le produit ${createdLivre.name} a bien été créé !`;
   // Retourner la réponse HTTP en json avec le msg et le produit créé
-  res.json(success(message, createdProduct));
+  res.json(success(message, createdLivre));
 });
+
+livresRouter.delete("/:id", (req, res) => {
+    const livreId = req.params.id;
+    let deletedlivre = getLivre(livreId);
+    removeLivre(livreId);
+    // Définir un message pour le consommateur de l'API REST
+    const message = `Le produit ${deletedLivre.name} a bien été supprimé !`;
+    // Retourner la réponse HTTP en json avec le msg et le produit créé
+    res.json(success(message, deletedLivre));
+    });
+
+
+    livresRouter.put("/:id", (req, res) => {
+        const livreId = req.params.id;
+        const livre = getlivre(livreId);
+        // Mise à jour du produit
+        // A noter que la propriété 'created' n'étant pas modifiée, sera conservée telle quelle.
+        const updatedLivre = {
+        id: livreId,
+        ...req.body,
+        created: livre.created,
+        };
+        updatelivre(livreId, updatedLivre);
+        // Définir un message pour l'utilisateur de l'API REST
+        const message = `Le produit ${updatedLivre.name} dont l'id vaut ${livreId} a été mis à jour avec succès !`;
+        // Retourner la réponse HTTP en json avec le msg et le produit créé
+        res.json(success(message, updatedLivre));
+        });
+        
