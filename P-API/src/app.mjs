@@ -1,8 +1,8 @@
 import express from "express";
+import { initDb, Livre, sequelize } from "./db/sequelize.mjs";
 const app = express();
 app.use(express.json());
 const port = 3000;
-import { sequelize, initDb, livre } from "./db/sequelize.mjs";
 
 sequelize
 .authenticate()
