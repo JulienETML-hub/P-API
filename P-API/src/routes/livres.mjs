@@ -62,17 +62,24 @@ livresRouter.delete("/:id", (req, res) => {
 
 livresRouter.put("/:id", (req, res) => {
   const livreId = req.params.id;
-  const livre = getlivre(livreId);
-  // Mise à jour du livre
-  // A noter que la propriété 'created' n'étant pas modifiée, sera conservée telle quelle.
-  const updatedLivre = {
-    id: livreId,
-    ...req.body,
-    created: livre.created,
-  };
-  updatedLivre(livreId, updatedLivre);
-  // Définir un message pour l'utilisateur de l'API REST
-  const message = `Le livre ${updatedLivre.name} dont l'id vaut ${livreId} a été mis à jour avec succès !`;
-  // Retourner la réponse HTTP en json avec le msg et le livre créé
-  res.json(success(message, updatedLivre));
+  Livre.update(req.body, { were: { id: livreId }})
+    .then((_) => {
+      Livre.findByPk(livreId)
+        .then((updatedLivre) => {
+          if (updatedLivre === null) {
+            const message = "Le livre demandé n'existe pas. Merci de réessayer avec un autre identifiant.";
+            return res.status(404).json({ message });
+          }
+          const message = `Le livre ${updatedLivre.name} dont l'id vaut ${updatedLivre.id} a été mis à jour avec succé`
+          res.json(success(message, updatedLivre));
+        })
+        .catch((error) => {
+          const message = "Le produit n'a pas pu etre mis à jour. Merci de réessayer dans quelques instants"
+          res.status(500).json({ messafe, data: error });
+        });
+    })
+    .catch((error) => {
+      const message = "Le produit n'a pas pu être mis à jour. merci de réessayer dans quelques instants.";
+      res.status(500).json({ message, data: error });
+    });
 });
