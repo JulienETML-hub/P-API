@@ -62,9 +62,9 @@ livresRouter.delete("/:id", (req, res) => {
 
 livresRouter.put("/:id", (req, res) => {
   const livreId = req.params.id;
-  Livre.update(req.body, { were: { id: livreId }})
+  livre.update(req.body, { were: { id: livreId }})
     .then((_) => {
-      Livre.findByPk(livreId)
+      livre.findByPk(livreId)
         .then((updatedLivre) => {
           if (updatedLivre === null) {
             const message = "Le livre demandé n'existe pas. Merci de réessayer avec un autre identifiant.";
