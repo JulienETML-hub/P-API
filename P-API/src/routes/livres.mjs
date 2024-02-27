@@ -37,17 +37,16 @@ livresRouter.get("/:id", (req, res) => {
 });
 
 livresRouter.post("/", (req, res) => {
-  // Création d'un nouvel id du livre
-  // Dans les prochains versions, c'est MySQL qui gérera cela pour nous (identifiant auto_increment)
-  const id = getUniqueId(livres);
-  // Création d'un objet avec les nouvelles informations du livres
-  const createdLivre = { ...req.body, ...{ id: id, created: new Date() } };
-  // Ajout du nouveau livre dans le tableau
-  livres.push(createdLivre);
-  // Définir un message pour le consommateur de l'API REST
-  const message = `Le livre ${createdLivre.name} a bien été créé !`;
-  // Retourner la réponse HTTP en json avec le msg et le livre créé
-  res.json(success(message, createdLivre));
+  livre.created(req.body)
+    .then((createdLivre) => {
+      const message = 
+      `Le livre ${createdLivre.name} a bien été crée!`
+      res.json(success(message, createdLivre));
+    })
+    .catch((error) => {
+      const message = "Le produit n'a pas pu être ajouté. Merci de réessayer dans quelque instants.";
+    res.status(500).json({ message, data: error });
+  });
 });
 
 livresRouter.delete("/:id", (req, res) => {
