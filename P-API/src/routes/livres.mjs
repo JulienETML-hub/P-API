@@ -26,7 +26,7 @@ livresRouter.get("/:id", (req, res) => {
           "Le livre demandé n'existe pas. merci de réessayer avec un autre identifiant.";
         return res.status(404).json({ message });
       }
-      const message = `Le livre dont l'id vaut ${livreId} a bien été récupéré.`
+      const message = `Le livre dont l'id vaut ${livre.Id} a bien été récupéré.`
       res.json(success(message, livre));
     })
     .catch((error) => {
@@ -54,9 +54,9 @@ livresRouter.delete("/:id", (req, res) => {
   let deletedlivre = getLivre(livreId);
   removeLivre(livreId);
   // Définir un message pour le consommateur de l'API REST
-  const message = `Le livre ${deletedLivre.name} a bien été supprimé !`;
+  const message = `Le livre ${deletedlivre.name} a bien été supprimé !`;
   // Retourner la réponse HTTP en json avec le msg et le livre créé
-  res.json(success(message, deletedLivre));
+  res.json(success(message, deletedlivre));
 });
 
 
@@ -70,7 +70,7 @@ livresRouter.put("/:id", (req, res) => {
     ...req.body,
     created: livre.created,
   };
-  updatelivre(livreId, updatedLivre);
+  updatedLivre(livreId, updatedLivre);
   // Définir un message pour l'utilisateur de l'API REST
   const message = `Le livre ${updatedLivre.name} dont l'id vaut ${livreId} a été mis à jour avec succès !`;
   // Retourner la réponse HTTP en json avec le msg et le livre créé
