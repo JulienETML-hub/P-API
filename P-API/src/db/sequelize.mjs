@@ -1,5 +1,5 @@
 
- 
+ import { Sequelize } from "sequelize";
 import { livres } from "./mockup-datas.mjs";
 import { /*UserModel,*/ livreModel } from "../models/livres.mjs";
 //import bcrypt from "bcrypt";
