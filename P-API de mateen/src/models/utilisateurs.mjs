@@ -11,14 +11,41 @@ const utilisateursModel = (sequelize, DataTypes) => {
             pseudo: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                validate: {
+                    notNull: {
+                        msg: "Le pseudo ne doit pas être nul.",
+                    },
+                    notEmpty: {
+                        msg: "Le pseudo ne doit pas être vide.",
+                    },
+                },
             },
-            motdepasse: {
+            motDePasse: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                validate: {
+                    notNull: {
+                        msg: "Le mot de passe ne doit pas être nul.",
+                    },
+                    notEmpty: {
+                        msg: "Le mot de passe ne doit pas être vide.",
+                    },
+                },
             },
-            dateenregistrement: {
+            dateEnregistrement: {
                 type: DataTypes.DATE,
                 allowNull: false,
+                validate: {
+                    notNull: {
+                        msg: "La date d'enregistrement ne doit pas être nulle.",
+                    },
+                    notEmpty: {
+                        msg: "La date d'enregistrement ne doit pas être vide.",
+                    },
+                    isDate: {
+                        msg: "La date d'enregistrement doit être une date valide.",
+                    },
+                },
             },
         },
         {
