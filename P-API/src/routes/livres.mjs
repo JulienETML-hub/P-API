@@ -4,7 +4,7 @@ import { success, getUniqueId } from "./helper.mjs";
 import { livre } from "../db/sequelize.mjs";
 const livresRouter = express();
 
-livresRouter.get("/", (req, res) => {
+livresRouter.get("/", (req, res) => { // Récupérer la liste des livres
   livre.findAll()
     .then((livres) => {
       const message = "La liste des livres a bien été récupérée.";
@@ -18,7 +18,7 @@ livresRouter.get("/", (req, res) => {
 });
 export { livresRouter };
 
-livresRouter.get("/:id", (req, res) => {
+livresRouter.get("/:id", (req, res) => { // Récupérer un livre par son id 
   livre.findByPk(req.params.id)
     .then((livre) => {
       if (livre === null) {
@@ -36,7 +36,7 @@ livresRouter.get("/:id", (req, res) => {
   });
 });
 
-livresRouter.post("/", (req, res) => {
+livresRouter.post("/", (req, res) => { // Créer un livre
   livre.created(req.body)
     .then((createdLivre) => {
       const message = 
@@ -49,7 +49,7 @@ livresRouter.post("/", (req, res) => {
   });
 });
 
-livresRouter.delete("/:id", (req, res) => {
+livresRouter.delete("/:id", (req, res) => { // Supprimer un livre
   const livreId = req.params.id;
   let deletedlivre = getLivre(livreId);
   removeLivre(livreId);
@@ -60,26 +60,26 @@ livresRouter.delete("/:id", (req, res) => {
 });
 
 
-livresRouter.put("/:id", (req, res) => {
+livresRouter.put("/:id", (req, res) => { // Mettre à jour un livre
   const livreId = req.params.id;
   livre.update(req.body, { were: { id: livreId }})
     .then((_) => {
-      livre.findByPk(livreId)
-        .then((updatedLivre) => {
-          if (updatedLivre === null) {
+      livre.findByPk(livreId) 
+        .then((updatedLivre) => { // si le livre est trouvé
+          if (updatedLivre === null) { // Si le livre n'existe pas
             const message = "Le livre demandé n'existe pas. Merci de réessayer avec un autre identifiant.";
-            return res.status(404).json({ message });
+            return res.status(404).json({ message }); // Retourner une erreur 404
           }
-          const message = `Le livre ${updatedLivre.name} dont l'id vaut ${updatedLivre.id} a été mis à jour avec succé`
+          const message = `Le livre ${updatedLivre.name} dont l'id vaut ${updatedLivre.id} a été mis à jour avec succées.`;
           res.json(success(message, updatedLivre));
         })
         .catch((error) => {
           const message = "Le produit n'a pas pu etre mis à jour. Merci de réessayer dans quelques instants"
-          res.status(500).json({ messafe, data: error });
+          res.status(500).json({ message, data: error });
         });
     })
-    .catch((error) => {
+    .catch((error) => { // Si la mise à jour échoue
       const message = "Le produit n'a pas pu être mis à jour. merci de réessayer dans quelques instants.";
-      res.status(500).json({ message, data: error });
+      res.status(500).json({ message, data: error }); // Retourner une erreur 500
     });
 });
