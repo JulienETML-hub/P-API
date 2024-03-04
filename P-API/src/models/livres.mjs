@@ -65,4 +65,5 @@ const livreModel = (sequelize, DataTypes) => {
   );
 };
 
+// export livreModel
 export { livreModel };
