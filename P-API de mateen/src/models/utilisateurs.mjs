@@ -1,4 +1,4 @@
-// Définition du modèle de la table utilisateurs
+// Définition du modèle de la table utilisateurs f
 const utilisateursModel = (sequelize, DataTypes) => {
     return sequelize.define(
         "Utilisateur",

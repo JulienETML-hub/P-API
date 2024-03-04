@@ -19,7 +19,7 @@ const livreModel = (sequelize, DataTypes) => {
           type: DataTypes.STRING,
           allowNull: true,
         },
-        anneededition: {
+        anneeEdition: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
