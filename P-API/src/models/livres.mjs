@@ -7,7 +7,7 @@ const livreModel = (sequelize, DataTypes) => {
           primaryKey: true,
           autoIncrement: true,
         },
-        nom: {
+        titre: {
           type: DataTypes.STRING,
           allowNull: false,
         },
@@ -23,6 +23,14 @@ const livreModel = (sequelize, DataTypes) => {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
+        imageCouverture:{
+          type:DataTypes.STRING,
+          allowNull:true,
+        },
+        editeur:{
+          type:DataTypes.STRING,
+          allowNull:true,
+        }
       },
       {
         timestamps: true,
