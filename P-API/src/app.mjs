@@ -1,6 +1,7 @@
 import express from "express";
+import { initDb, Livre, sequelize } from "./db/sequelize.mjs";
 import { livresRouter } from "./routes/livres.mjs";
-import { sequelize, initDb, livre } from "./db/sequelize.mjs";
+
 
 const app = express();
 app.use(express.json());
