@@ -2,7 +2,7 @@ const livreModel = (sequelize, DataTypes) => {
     return sequelize.define(
       "Livre",
       {
-        id_livre: {
+        idLivre: {
           type: DataTypes.INTEGER,
           primaryKey: true,
           autoIncrement: true,
