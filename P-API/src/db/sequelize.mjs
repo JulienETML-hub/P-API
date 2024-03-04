@@ -42,12 +42,9 @@ const importLivres = () => {
   // Importe tous les livres présents dans un fichier ou une source de données
   livres.map((livre) => {
     Livre.create({
-      nom: livre.nom,
-      categorie: livre.categorie,
+      nom: livre.titre,
       extrait: livre.extrait,
       resume: livre.resume,
-      auteur: livre.auteur,
-      editeur: livre.editeur,
       anneeEdition: livre.anneeEdition,
       imageCouverture: livre.imageCouverture,
     }).then((livre) => console.log(livre.toJSON())).catch((error) => {
