@@ -4,6 +4,7 @@ import { success, getUniqueId } from "./helper.mjs";
 import { livre } from "../db/sequelize.mjs";
 const livresRouter = express();
 
+// route GET /livres
 livresRouter.get("/", (req, res) => { // Récupérer la liste des livres
   livre.findAll()
     .then((livres) => {
@@ -18,6 +19,7 @@ livresRouter.get("/", (req, res) => { // Récupérer la liste des livres
 });
 export { livresRouter };
 
+// route GET /livres/:id
 livresRouter.get("/:id", (req, res) => { // Récupérer un livre par son id 
   livre.findByPk(req.params.id)
     .then((livre) => {
@@ -36,6 +38,7 @@ livresRouter.get("/:id", (req, res) => { // Récupérer un livre par son id
   });
 });
 
+// route POST /livres
 livresRouter.post("/", (req, res) => { // Créer un livre
   livre.created(req.body)
     .then((createdLivre) => {
@@ -49,6 +52,7 @@ livresRouter.post("/", (req, res) => { // Créer un livre
   });
 });
 
+// route DELETE /livres/:id
 livresRouter.delete("/:id", (req, res) => { // Supprimer un livre
   const livreId = req.params.id;
   let deletedlivre = getLivre(livreId);
@@ -59,7 +63,7 @@ livresRouter.delete("/:id", (req, res) => { // Supprimer un livre
   res.json(success(message, deletedlivre));
 });
 
-
+// route PUT /livres/:id
 livresRouter.put("/:id", (req, res) => { // Mettre à jour un livre
   const livreId = req.params.id;
   livre.update(req.body, { were: { id: livreId }})
