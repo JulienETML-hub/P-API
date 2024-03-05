@@ -12,7 +12,7 @@ const livreModel = (sequelize, DataTypes) => {
         allowNull: false,
       },
       extrait: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       resume: {

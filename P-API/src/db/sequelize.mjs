@@ -42,14 +42,12 @@ const importLivres = () => {
   // Importe tous les livres présents dans un fichier ou une source de données
   livres.map((livre) => {
     Livre.create({
-      nom: livre.nom,
-      categorie: livre.categorie,
+      titre: livre.titre,
       extrait: livre.extrait,
       resume: livre.resume,
-      auteur: livre.auteur,
-      editeur: livre.editeur,
       anneeEdition: livre.anneeEdition,
       imageCouverture: livre.imageCouverture,
+      editeur: livre.editeur,
     }).then((livre) => console.log(livre.toJSON())).catch((error) => {
       console.error("Erreur lors de la création du livre :", error);
     });;
@@ -60,7 +58,7 @@ const importLivres = () => {
 const importUtilisateurs = () => {
   // Importe tous les utilisateurs présents dans un fichier ou une source de données
   utilisateurs.map((utilisateur) => {
-    utilisateur.create({
+    Utilisateur.create({
       pseudo: utilisateur.pseudo,
       motDePasse: utilisateur.motDePasse,
       dateEnregistrement: utilisateur.dateEnregistrement,
