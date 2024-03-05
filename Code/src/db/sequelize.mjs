@@ -39,18 +39,30 @@ const Categories = categorieModel(sequelize, DataTypes);
 const Editeur = editeursModel(sequelize, DataTypes);
 
 // Association des tables
-// Un livre peut avoir plusieurs auteurs, categories, editeurs et commentaires
-Auteur.belongsTo(Livre, { foreignKey: "livreId" });
-Categories.belongsTo(Livre, { foreignKey: "livreId" });
-Editeur.belongsTo(Livre, { foreignKey: "livreId" });
-Commentaire.belongsTo(Livre, { foreignKey: "livreId" });
-Livre.hasMany(Auteur, { foreignKey: "livreId" });
-Livre.hasMany(Categories, { foreignKey: "livreId" });
-Livre.hasMany(Editeur, { foreignKey: "livreId" });
+// Un editeur peut avoir plusieurs livres
+Editeur.hasMany(Livre, { foreignKey: "editeurId" });
+Livre.belongsTo(Editeur, { foreignKey: "editeurId" });
+
+// Un auteur peut avoir plusieurs livres
+Auteur.hasMany(Livre, { foreignKey: "auteurId" });
+Livre.belongsTo(Auteur, { foreignKey: "auteurId" });
+
+// une categorie peut avoir plusieurs livres
+Categories.hasMany(Livre, { foreignKey: "categorieId" });
+Livre.belongsTo(Categories, { foreignKey: "categorieId" });
+
+// Un livre peut avoir plusieurs commentaires
 Livre.hasMany(Commentaire, { foreignKey: "livreId" });
+Commentaire.belongsTo(Livre, { foreignKey: "livreId" });
+
+// Un utilisateur peut avoir plusieurs livres
+Utilisateur.hasMany(Livre, { foreignKey: "utilisateurId" });
+Livre.belongsTo(Utilisateur, { foreignKey: "utilisateurId" });
+
 // Un utilisateur peut avoir plusieurs commentaires
 Utilisateur.hasMany(Commentaire, { foreignKey: "utilisateurId" });
 Commentaire.belongsTo(Utilisateur, { foreignKey: "utilisateurId" });
+
 
 // Fonction pour initialiser la base de données
 let initDb = () => {
