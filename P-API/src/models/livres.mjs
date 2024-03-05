@@ -73,7 +73,7 @@ const livreModel = (sequelize, DataTypes) => {
     },
     {
       timestamps: true,
-      createdAt: "created",
+      createdAt: "created_at",
       updatedAt: false,
       tableName: "livres"
     }
