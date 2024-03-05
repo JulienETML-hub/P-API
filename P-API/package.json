@@ -1,28 +1,19 @@
 {
   "name": "p-api",
-  "type": "module",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.mjs",
+  "main": "app.mjs",
   "scripts": {
     "start": "nodemon src/app.mjs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JulienETML-hub/P-API.git"
-  },
-  "author": "Mateen, Julien",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/JulienETML-hub/P-API/issues"
-  },
-  "homepage": "https://github.com/JulienETML-hub/P-API#readme",
-  "devDependencies": {
-    "nodemon": "^3.1.0"
-  },
   "dependencies": {
-    "express": "^4.18.2",
+    "express": "^4.18.3",
     "mysql2": "^3.9.2",
     "sequelize": "^6.37.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }

@@ -3,7 +3,7 @@ import { Sequelize, DataTypes } from "sequelize";
 
 //importation des mockup
 import { utilisateurs } from "./mockup-utilisateurs.mjs";
-import { livres } from "./mockup-datas.mjs";
+import { livres } from "./mockup-livres.mjs";
 
 //importation des models
 import { livreModel } from "../models/livres.mjs";
@@ -42,9 +42,12 @@ const importLivres = () => {
   // Importe tous les livres présents dans un fichier ou une source de données
   livres.map((livre) => {
     Livre.create({
-      nom: livre.titre,
+      nom: livre.nom,
+      categorie: livre.categorie,
       extrait: livre.extrait,
       resume: livre.resume,
+      auteur: livre.auteur,
+      editeur: livre.editeur,
       anneeEdition: livre.anneeEdition,
       imageCouverture: livre.imageCouverture,
     }).then((livre) => console.log(livre.toJSON())).catch((error) => {
