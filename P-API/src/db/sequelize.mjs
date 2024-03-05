@@ -33,7 +33,7 @@ let initDb = () => {
     .then(() => {
       importLivres();
       importUtilisateurs();
-      console.log("La base de données dblivres a bien été synchronisée");
+      console.log("La base de données db_livres a bien été synchronisée");
     });
 };
 
@@ -47,7 +47,7 @@ const importLivres = () => {
       resume: livre.resume,
       anneeEdition: livre.anneeEdition,
       imageCouverture: livre.imageCouverture,
-      editeur: livre.editeur,
+      editeur: livre.editeur
     }).then((livre) => console.log(livre.toJSON())).catch((error) => {
       console.error("Erreur lors de la création du livre :", error);
     });;
@@ -68,4 +68,4 @@ const importUtilisateurs = () => {
   });
 };
 
-export { sequelize, initDb, Livre };
+export { sequelize, initDb, Livre, Utilisateur };
