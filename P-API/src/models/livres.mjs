@@ -33,7 +33,7 @@ const livreModel = (sequelize, DataTypes) => {
       },
       resume: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "Le résumé ne doit pas être nul",
@@ -60,7 +60,7 @@ const livreModel = (sequelize, DataTypes) => {
       },
       imageCouverture: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "L'image de couverture ne doit pas être nulle",
@@ -72,7 +72,7 @@ const livreModel = (sequelize, DataTypes) => {
       },
       editeur: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "L'éditeur ne doit pas être nul",
