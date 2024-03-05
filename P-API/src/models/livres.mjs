@@ -69,19 +69,7 @@ const livreModel = (sequelize, DataTypes) => {
             msg: "L'image de couverture ne doit pas être vide",
           }
         }
-      },
-      editeur: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notNull: {
-            msg: "L'éditeur ne doit pas être nul",
-          },
-          notEmpty: {
-            msg: "L'éditeur ne doit pas être vide",
-          },
-        },
-      },
+      }
     },
     {
       timestamps: true,

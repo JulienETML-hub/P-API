@@ -46,8 +46,7 @@ const importLivres = () => {
       extrait: livre.extrait,
       resume: livre.resume,
       anneeEdition: livre.anneeEdition,
-      imageCouverture: livre.imageCouverture,
-      editeur: livre.editeur
+      imageCouverture: livre.imageCouverture
     }).then((livre) => console.log(livre.toJSON())).catch((error) => {
       console.error("Erreur lors de la création du livre :", error);
     });;
