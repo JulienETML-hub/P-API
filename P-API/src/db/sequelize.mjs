@@ -38,6 +38,20 @@ const Auteur = auteurModel(sequelize, DataTypes);
 const Categories = categorieModel(sequelize, DataTypes);
 const Editeur = editeursModel(sequelize, DataTypes);
 
+// Association des tables
+// Un livre peut avoir plusieurs auteurs, categories, editeurs et commentaires
+Auteur.belongsTo(Livre, { foreignKey: "livreId" });
+Categories.belongsTo(Livre, { foreignKey: "livreId" });
+Editeur.belongsTo(Livre, { foreignKey: "livreId" });
+Commentaire.belongsTo(Livre, { foreignKey: "livreId" });
+Livre.hasMany(Auteur, { foreignKey: "livreId" });
+Livre.hasMany(Categories, { foreignKey: "livreId" });
+Livre.hasMany(Editeur, { foreignKey: "livreId" });
+Livre.hasMany(Commentaire, { foreignKey: "livreId" });
+// Un utilisateur peut avoir plusieurs commentaires
+Utilisateur.hasMany(Commentaire, { foreignKey: "utilisateurId" });
+Commentaire.belongsTo(Utilisateur, { foreignKey: "utilisateurId" });
+
 // Fonction pour initialiser la base de données
 let initDb = () => {
   return sequelize
