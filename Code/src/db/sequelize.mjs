@@ -16,6 +16,7 @@ import { commentaireModel } from "../models/commentaires.mjs";
 import { auteurModel } from "../models/auteurs.mjs";
 import { categorieModel } from "../models/categories.mjs";
 import { editeursModel } from "../models/editeurs.mjs";
+import { UserModel } from "../models/user.mjs";
 
 
 const sequelize = new Sequelize(
@@ -71,7 +72,7 @@ let initDb = () => {
     .then(() => {
       importLivres();
       importUtilisateurs();
-      importCommentaires(); 
+      importCommentaires();
       importAuteurs();
       importCategories();
       importEditeurs();
@@ -97,17 +98,18 @@ const importLivres = () => {
 
 // Fonction pour importer les utilisateurs
 const importUtilisateurs = () => {
-  // Importe tous les utilisateurs présents dans un fichier ou une source de données
-  utilisateurs.map((utilisateur) => {
-    Utilisateur.create({
-      pseudo: utilisateur.pseudo,
-      motDePasse: utilisateur.motDePasse,
-      dateEnregistrement: utilisateur.dateEnregistrement,
-    }).then((utilisateur) => console.log(utilisateur.toJSON())).catch((error) => {
-      console.error("Erreur lors de la création de l'utilisateur :", error);
-    });
-  });
+  bcrypt
+    .hash("etml", 10) // temps pour hasher = du sel
+    .then((hash) =>
+      Utilisateur.create({
+        pseudo: "etml",
+        motDePasse: hash,
+        dateEnregistrement: new Date(),
+      })
+    )
+    .then((utilisateur) => console.log(utilisateur.toJSON()));
 };
+
 
 // Fonction pour importer les commentaires
 const importCommentaires = () => {

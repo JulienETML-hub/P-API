@@ -1,6 +1,7 @@
 // Importation des modules
 import express from "express";
 import { success, getUniqueId } from "./helper.mjs";
+import { auth } from "../auth/auth.mjs";
 
 // Importation des modèles
 import { Auteur } from "../db/sequelize.mjs";
@@ -8,8 +9,8 @@ import { Auteur } from "../db/sequelize.mjs";
 // Création du routeur
 const auteursRouter = express();
 
-// route GET /auteurs
-auteursRouter.get("/", (req, res) => { // Récupérer la liste des auteurs
+// route GET /auteurs avec l'authentification
+auteursRouter.get("/", auth, (req, res) => { // Récupérer tous les auteurs
   Auteur.findAll()
     .then((auteurs) => {
       const message = "La liste des auteurs a bien été récupérée.";
@@ -22,8 +23,8 @@ auteursRouter.get("/", (req, res) => { // Récupérer la liste des auteurs
     });
 });
 
-// route GET /auteurs/:id
-auteursRouter.get("/:id", (req, res) => { // Récupérer un auteur par son id
+// route GET /auteurs/:id avec l'authentification
+auteursRouter.get("/:id", auth, (req, res) => { // Récupérer un auteur
   Auteur.findByPk(req.params.id)
     .then((auteur) => {
       if (auteur === null) {
@@ -41,8 +42,8 @@ auteursRouter.get("/:id", (req, res) => { // Récupérer un auteur par son id
     });
 });
 
-// route POST /auteurs
-auteursRouter.post("/", (req, res) => { // Créer un auteur
+// route POST /auteurs avec l'authentification
+auteursRouter.post("/", auth, (req, res) => { // Créer un auteur
   Auteur.create(req.body)
     .then((createdAuteur) => {
       const message = `L'auteur ${createdAuteur.nom} a bien été créé !`;
@@ -56,7 +57,7 @@ auteursRouter.post("/", (req, res) => { // Créer un auteur
 });
 
 // route DELETE /auteurs/:id
-auteursRouter.delete("/:id", (req, res) => { // Supprimer un auteur
+auteursRouter.delete("/:id", auth, (req, res) => { // Supprimer un auteur
   Auteur.findByPk(req.params.id)
     .then((auteur) => {
       if (auteur === null) {

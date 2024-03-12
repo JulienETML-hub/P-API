@@ -4,12 +4,13 @@ import { success, getUniqueId } from "./helper.mjs";
 
 // Importation des modèles
 import { Editeur } from "../db/sequelize.mjs";
+import { auth } from "../auth/auth.mjs";
 
 // Création du routeur
 const editeursRouter = express(); 
 
-// route GET /editeurs
-editeursRouter.get("/", (req, res) => { // Récupérer la liste des éditeurs
+// route GET /editeurs avec l'authentification
+editeursRouter.get("/", auth, (req, res) => { // Récupérer la liste des éditeurs
   Editeur.findAll()
     .then((editeurs) => {
       const message = "La liste des éditeurs a bien été récupérée.";
@@ -22,8 +23,8 @@ editeursRouter.get("/", (req, res) => { // Récupérer la liste des éditeurs
     });
 });
 
-// route GET /editeurs/:id
-editeursRouter.get("/:id", (req, res) => { // Récupérer un éditeur par son id
+// route GET /editeurs/:id avec l'authentification
+editeursRouter.get("/:id", auth, (req, res) => { // Récupérer un éditeur par son id
   Editeur.findByPk(req.params.id)
     .then((editeur) => {
       if (editeur === null) {
@@ -41,8 +42,8 @@ editeursRouter.get("/:id", (req, res) => { // Récupérer un éditeur par son id
     });
 });
 
-// route POST /editeurs
-editeursRouter.post("/", (req, res) => { // Créer un éditeur
+// route POST /editeurs avec l'authentification
+editeursRouter.post("/", auth, (req, res) => { // Créer un éditeur
   Editeur.create(req.body)
     .then((createdEditeur) => {
       const message = `L'éditeur ${createdEditeur.nom} a bien été créé !`;
@@ -55,8 +56,8 @@ editeursRouter.post("/", (req, res) => { // Créer un éditeur
     });
 });
 
-// route DELETE /editeurs/:id
-editeursRouter.delete("/:id", (req, res) => { // Supprimer un éditeur
+// route DELETE /editeurs/:id avec l'authentification
+editeursRouter.delete("/:id", auth, (req, res) => { // Supprimer un éditeur
   Editeur.findByPk(req.params.id)
     .then((editeur) => {
       if (editeur === null) {

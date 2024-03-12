@@ -1,6 +1,7 @@
 // Importation des modules
 import express from "express";
 import { success, getUniqueId } from "./helper.mjs";
+import { auth } from "../auth/auth.mjs";
 
 // Importation des modèles
 import { Commentaire } from "../models/index.js";
@@ -8,8 +9,8 @@ import { Commentaire } from "../models/index.js";
 // Création du routeur
 const commentairesRouter = express();
 
-// route GET /commentaires
-commentairesRouter.get("/", (req, res) => { // Récupérer la liste des commentaires
+// route GET /commentaires avec l'authentification
+commentairesRouter.get("/", auth, (req, res) => { // Récupérer la liste des commentaires
   Commentaire.findAll()
     .then((commentaires) => {
       const message = "La liste des commentaires a bien été récupérée.";
@@ -22,8 +23,8 @@ commentairesRouter.get("/", (req, res) => { // Récupérer la liste des commenta
     });
 });
 
-// route GET /commentaires/:id
-commentairesRouter.get("/:id", (req, res) => { // Récupérer un commentaire par son id
+// route GET /commentaires/:id avec l'authentification
+commentairesRouter.get("/:id", auth, (req, res) => { // Récupérer un commentaire par son id
   Commentaire.findByPk(req.params.id)
     .then((commentaire) => {
       if (commentaire === null) {
@@ -41,8 +42,8 @@ commentairesRouter.get("/:id", (req, res) => { // Récupérer un commentaire par
     });
 });
 
-// route POST /commentaires
-commentairesRouter.post("/", (req, res) => { // Créer un commentaire
+// route POST /commentaires avec l'authentification
+commentairesRouter.post("/", auth, (req, res) => { // Créer un commentaire
   Commentaire.create(req.body)
     .then((createdCommentaire) => {
       const message = `Le commentaire ${createdCommentaire.contenu} a bien été créé !`;
@@ -55,8 +56,8 @@ commentairesRouter.post("/", (req, res) => { // Créer un commentaire
     });
 });
 
-// route DELETE /commentaires/:id
-commentairesRouter.delete("/:id", (req, res) => { // Supprimer un commentaire
+// route DELETE /commentaires/:id avec l'authentification
+commentairesRouter.delete("/:id", auth, (req, res) => { // Supprimer un commentaire
   Commentaire.findByPk(req.params.id)
     .then((commentaire) => {
       if (commentaire === null) {

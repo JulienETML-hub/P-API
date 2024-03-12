@@ -1,6 +1,7 @@
 import express from "express";
 import { initDb, Livre, sequelize } from "./db/sequelize.mjs";
 import { livresRouter } from "./routes/livres.mjs";
+import { loginRouter } from "./routes/login.mjs";
 
 
 const app = express();
@@ -20,12 +21,12 @@ app.get("/api/", (req, res) => {
     res.redirect(`http://localhost:${port}/`);
 });
 
-app.use("/api/livres", livresRouter);
 app.listen(port, () => {
     console.log(`Example app listening on port http://localhost:${port}`);
 });
 
-
+app.use("/api/login", loginRouter);
+app.use("/api/livres", livresRouter);
 // Si aucune route ne correspondant à l'URL demandée par le consommateur
 app.use(({ res }) => {
     const message =

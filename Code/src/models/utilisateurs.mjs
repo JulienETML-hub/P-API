@@ -11,6 +11,9 @@ const utilisateursModel = (sequelize, DataTypes) => {
             pseudo: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique: {
+                    msg: "Ce pseudo est déjà pris",
+                },
                 validate: {
                     notNull: {
                         msg: "Le pseudo ne doit pas être nul",

@@ -1,6 +1,7 @@
 // Importation des modules
 import express from "express";
 import { success, getUniqueId } from "./helper.mjs";
+import { auth } from "../auth/auth.mjs";
 
 // Importation des modèles
 import { Categorie } from "../db/sequelize.mjs";
@@ -8,8 +9,8 @@ import { Categorie } from "../db/sequelize.mjs";
 // Création du routeur
 const categoriesRouter = express();
 
-// route GET /categories
-categoriesRouter.get("/", (req, res) => { // Récupérer la liste des catégories
+// route GET /categories avec l'authentification
+categoriesRouter.get("/", auth, (req, res) => { // Récupérer la liste des catégories
   Categorie.findAll()
     .then((categories) => {
       const message = "La liste des catégories a bien été récupérée.";
@@ -22,8 +23,8 @@ categoriesRouter.get("/", (req, res) => { // Récupérer la liste des catégorie
     });
 });
 
-// route GET /categories/:id
-categoriesRouter.get("/:id", (req, res) => { // Récupérer une catégorie par son id
+// route GET /categories/:id  avec l'authentification
+categoriesRouter.get("/:id", auth, (req, res) => { // Récupérer une catégorie par son id
   Categorie.findByPk(req.params.id)
     .then((categorie) => {
       if (categorie === null) {
@@ -41,8 +42,8 @@ categoriesRouter.get("/:id", (req, res) => { // Récupérer une catégorie par s
     });
 });
 
-// route POST /categories
-categoriesRouter.post("/", (req, res) => { // Créer une catégorie
+// route POST /categories avec l'authentification
+categoriesRouter.post("/", auth, (req, res) => { // Créer une catégorie
   Categorie.create(req.body)
     .then((createdCategorie) => {
       const message = `La catégorie ${createdCategorie.nom} a bien été créée !`;
@@ -55,8 +56,8 @@ categoriesRouter.post("/", (req, res) => { // Créer une catégorie
     });
 });
 
-// route DELETE /categories/:id
-categoriesRouter.delete("/:id", (req, res) => { // Supprimer une catégorie
+// route DELETE /categories/:id avec l'authentification
+categoriesRouter.delete("/:id", auth, (req, res) => { // Supprimer une catégorie
   Categorie.findByPk(req.params.id)
     .then((categorie) => {
       if (categorie === null) {
