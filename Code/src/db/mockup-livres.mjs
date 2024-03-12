@@ -34,7 +34,7 @@ let livres =  // Tableau de livres
     resume: "Edmond Dantes cherche vengeance apres avoir ete trahi et emprisonne a tort.",
     anneeEdition: 1844,
     imageCouverture: "chemin/vers/lecomtedemontecristo.jpg",
-    id_categorie: 4,
+    id_categorie: 5,
   },
   {
     idLivre: 5,

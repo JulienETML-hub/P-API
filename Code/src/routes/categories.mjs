@@ -4,47 +4,61 @@ import { success, getUniqueId } from "./helper.mjs";
 import { auth } from "../auth/auth.mjs";
 
 // Importation des modèles
-import { Categorie } from "../db/sequelize.mjs";
+import { Categories, Livre } from "../db/sequelize.mjs";
+import { livres } from "../db/mockup-livres.mjs";
 
 // Création du routeur
 const categoriesRouter = express();
 
 // route GET /categories avec l'authentification
-categoriesRouter.get("/", auth, (req, res) => { // Récupérer la liste des catégories
-  Categorie.findAll()
-    .then((categories) => {
+categoriesRouter.get("/", auth, (req, res) => { // Récupérer toutes les catégories
+  Categories.findAll()
+    .then((Categories) => {
       const message = "La liste des catégories a bien été récupérée.";
-      res.json(success(message, categories));
+      res.json(success(message, Categories));
     })
     .catch((error) => {
-      const message =
-        "La liste des catégories n'a pas pu être récupérée. Merci de réessayer dans quelques instants.";
+      const message = "La liste des catégories n'a pas pu être récupérée. Merci de réessayer dans quelques instants.";
       res.status(500).json({ message, data: error });
     });
 });
 
-// route GET /categories/:id  avec l'authentification
-categoriesRouter.get("/:id", auth, (req, res) => { // Récupérer une catégorie par son id
-  Categorie.findByPk(req.params.id)
+
+// route GET /categories/:id permet de récupérer touts les livres d'une catégorie avec l'authentification 
+categoriesRouter.get("/:id/livres/", auth, async (req, res) => {
+  Categories.findByPk(req.params.id)
     .then((categorie) => {
       if (categorie === null) {
         const message =
-          "La catégorie demandée n'existe pas. Merci de réessayer avec un autre identifiant.";
+          "La categorie demandée n'existe pas. Merci de réessayer avec un autre identifiant.";
         return res.status(404).json({ message });
       }
-      const message = `La catégorie dont l'id vaut ${req.params.id} a bien été récupérée.`;
-      res.json(success(message, categorie));
+      return Livre.findAndCountAll({
+        where: {
+          id_categorie: categorie.idCategorie,
+        },
+        order: ["titre"],
+      }).then((livres) => {
+        let message;
+        if (livres.count === 0) {
+          message = `Il n'y a pas de produits pour la catégorie dont l'id vaut ${req.params.id}.`;
+        } else {
+          message = `La liste des produits de la catégorie dont l'id vaut ${req.params.id} a bien été récupérée.`;
+        }
+        res.json({ message, data: livres });
+      });
     })
     .catch((error) => {
       const message =
-        "La catégorie n'a pas pu être récupérée. Merci de réessayer dans quelques instants.";
+        "La liste des produits de la catégorie n'a pas pu être récupérée. Merci de réessayer dans quelques instants.";
       res.status(500).json({ message, data: error });
     });
 });
 
+
 // route POST /categories avec l'authentification
 categoriesRouter.post("/", auth, (req, res) => { // Créer une catégorie
-  Categorie.create(req.body)
+  Categories.create(req.body)
     .then((createdCategorie) => {
       const message = `La catégorie ${createdCategorie.nom} a bien été créée !`;
       res.json(success(message, createdCategorie));

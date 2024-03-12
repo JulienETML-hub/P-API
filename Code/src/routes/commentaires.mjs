@@ -4,7 +4,7 @@ import { success, getUniqueId } from "./helper.mjs";
 import { auth } from "../auth/auth.mjs";
 
 // Importation des modèles
-import { Commentaire } from "../models/index.js";
+import { Commentaire } from "../db/sequelize.mjs";
 
 // Création du routeur
 const commentairesRouter = express();

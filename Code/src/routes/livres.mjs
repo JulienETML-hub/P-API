@@ -1,7 +1,6 @@
 import express from "express";
 import { success, getUniqueId } from "./helper.mjs";
 import { Livre } from "../db/sequelize.mjs";
-import { livres } from "../db/mockup-livres.mjs";
 import { auth } from "../auth/auth.mjs";
 const livresRouter = express();
 
@@ -53,6 +52,9 @@ livresRouter.post("/", auth, (req, res) => { // Créer un livre
 });
 
 // route DELETE /livres/:id avec authentification
+
+
+
 livresRouter.delete("/:id", auth, (req, res) => { // Supprimer un livre
   Livre.findByPk(req.params.id)
     .then((livre) => {
@@ -61,9 +63,9 @@ livresRouter.delete("/:id", auth, (req, res) => { // Supprimer un livre
           "Le livre demandé n'existe pas. Merci de réessayer avec un autre identifiant.";
         return res.status(404).json({ message });
       }
-      Livre.destroy({ where: { id: req.params.id } })
+      Livre.destroy({ where: { idlivre: req.params.id } })
         .then(() => {
-          const message = `Le livre ${livre.name} a bien été supprimé !`;
+          const message = `Le livre ${livre.titre} a bien été supprimé !`;
           res.json(success(message, livre));
         })
         .catch((error) => {

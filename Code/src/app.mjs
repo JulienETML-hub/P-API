@@ -2,6 +2,11 @@ import express from "express";
 import { initDb, Livre, sequelize } from "./db/sequelize.mjs";
 import { livresRouter } from "./routes/livres.mjs";
 import { loginRouter } from "./routes/login.mjs";
+import { categoriesRouter } from "./routes/categories.mjs";
+import { editeursRouter } from "./routes/editeurs.mjs";
+import { auteursRouter } from "./routes/auteurs.mjs";
+import { commentairesRouter } from "./routes/commentaires.mjs";
+import { utilisateursRouter } from "./routes/utilisateurs.mjs";
 
 
 const app = express();
@@ -27,6 +32,11 @@ app.listen(port, () => {
 
 app.use("/api/login", loginRouter);
 app.use("/api/livres", livresRouter);
+app.use("/api/categories", categoriesRouter);
+app.use("/api/editeurs", editeursRouter);
+app.use("/api/auteurs", auteursRouter);
+app.use("/api/commentaires", commentairesRouter);
+app.use("/api/utilisateurs", utilisateursRouter);
 // Si aucune route ne correspondant à l'URL demandée par le consommateur
 app.use(({ res }) => {
     const message =
