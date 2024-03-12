@@ -83,7 +83,7 @@ categoriesRouter.delete("/:id", auth, (req, res) => { // Supprimer une catégori
     });
 });
 
-// route GET /categories/:id/livres avec l'authentification
+// route GET /categories/:id/livres avec l'authentification, route imbriquée
 categoriesRouter.get("/:id/livres", auth, (req, res) => { // Récupérer les livres d'une catégorie
   Categorie.findByPk(req.params.id, { include: "livres" }) // On inclut les livres de la catégorie
     .then((categorie) => { // Si la catégorie n'existe pas
@@ -94,13 +94,56 @@ categoriesRouter.get("/:id/livres", auth, (req, res) => { // Récupérer les liv
       } // Si la catégorie existe on renvoie les livres de la catégorie
       const message = `Les livres de la catégorie ${categorie.nom} ont bien été récupérés.`;
       res.json(success(message, categorie.livres));
-    })
+    }
+    )
     .catch((error) => { // Si une erreur survient on renvoie un message d'erreur
       const message =
         "Les livres de la catégorie n'ont pas pu être récupérés. Merci de réessayer dans quelques instants.";
       res.status(500).json({ message, data: error });
     });
-});
+}
+);
+
+
+
+
+
+// categoriesRouter.get("/:id/livres", auth, (req, res) => { // Récupérer les livres d'une catégorie
+//   Categorie.findByPk(req.params.id, { include: "livres" }) // On inclut les livres de la catégorie
+//     .then((categorie) => { // Si la catégorie n'existe pas
+//       if (categorie === null) { // On renvoie un message d'erreur
+//         const message =
+//           "La catégorie demandée n'existe pas. Merci de réessayer avec un autre identifiant.";
+//         return res.status(404).json({ message });
+//       } // Si la catégorie existe on renvoie les livres de la catégorie
+//       const message = `Les livres de la catégorie ${categorie.nom} ont bien été récupérés.`;
+//       res.json(success(message, categorie.livres));
+//     })
+//     .catch((error) => { // Si une erreur survient on renvoie un message d'erreur
+//       const message =
+//         "Les livres de la catégorie n'ont pas pu être récupérés. Merci de réessayer dans quelques instants.";
+//       res.status(500).json({ message, data: error });
+//     });
+// });
+
+
+// categoriesRouter.get("/:id/livres", auth, (req, res) => { // Récupérer les livres d'une catégorie
+//   Categorie.findByPk(req.params.id, { include: "livres" }) // On inclut les livres de la catégorie
+//     .then((categorie) => { // Si la catégorie n'existe pas
+//       if (categorie === null) { // On renvoie un message d'erreur
+//         const message =
+//           "La catégorie demandée n'existe pas. Merci de réessayer avec un autre identifiant.";
+//         return res.status(404).json({ message });
+//       } // Si la catégorie existe on renvoie les livres de la catégorie
+//       const message = `Les livres de la catégorie ${categorie.nom} ont bien été récupérés.`;
+//       res.json(success(message, categorie.livres));
+//     })
+//     .catch((error) => { // Si une erreur survient on renvoie un message d'erreur
+//       const message =
+//         "Les livres de la catégorie n'ont pas pu être récupérés. Merci de réessayer dans quelques instants.";
+//       res.status(500).json({ message, data: error });
+//     });
+// });
 
 // Exportation du routeur
 export { categoriesRouter };

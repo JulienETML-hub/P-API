@@ -6,7 +6,8 @@ let livres =  // Tableau de livres
     extrait: "chemin/vers/annakarenine.pdf",
     resume: "Le drame de ladultere dAnna Karenine, qui entraine des consequences tragiques dans la haute societe russe.",
     anneeEdition: 1877,
-    imageCouverture: "chemin/vers/annakarenine.jpg"
+    imageCouverture: "chemin/vers/annakarenine.jpg",
+    id_categorie: 1,
   },
   {
     idLivre: 2,
@@ -14,7 +15,8 @@ let livres =  // Tableau de livres
     extrait: "chemin/vers/leproces.pdf",
     resume: "Joseph K. est accuse dun crime mysterieux et se retrouve pris dans un systeme judiciaire kafkaïen.",
     anneeEdition: 1925,
-    imageCouverture: "chemin/vers/leproces.jpg"
+    imageCouverture: "chemin/vers/leproces.jpg",
+    id_categorie: 2,
   },
   {
     idLivre: 3,
@@ -22,7 +24,8 @@ let livres =  // Tableau de livres
     extrait: "chemin/vers/donquichotte.pdf",
     resume: "Les aventures de Don Quichotte et de son fidele ecuyer Sancho Panza, qui parcourent lEspagne en quete didealisme.",
     anneeEdition: 1605,
-    imageCouverture: "chemin/vers/donquichotte.jpg"
+    imageCouverture: "chemin/vers/donquichotte.jpg",
+    id_categorie: 3,
   },
   {
     idLivre: 4,
@@ -30,7 +33,8 @@ let livres =  // Tableau de livres
     extrait: "chemin/vers/lecomtedemontecristo.pdf",
     resume: "Edmond Dantes cherche vengeance apres avoir ete trahi et emprisonne a tort.",
     anneeEdition: 1844,
-    imageCouverture: "chemin/vers/lecomtedemontecristo.jpg"
+    imageCouverture: "chemin/vers/lecomtedemontecristo.jpg",
+    id_categorie: 4,
   },
   {
     idLivre: 5,
@@ -38,7 +42,8 @@ let livres =  // Tableau de livres
     extrait: "chemin/vers/lesfrereskaramazov.pdf",
     resume: "Les relations tumultueuses entre les freres Karamazov, qui sont temoins de la mort de leur pere.",
     anneeEdition: 1880,
-    imageCouverture: "chemin/vers/lesfrereskaramazov.jpg"
+    imageCouverture: "chemin/vers/lesfrereskaramazov.jpg",
+    id_categorie: 5,
   }
 ]
 

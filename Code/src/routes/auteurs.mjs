@@ -9,7 +9,7 @@ import { Auteur } from "../db/sequelize.mjs";
 // Création du routeur
 const auteursRouter = express();
 
-// route GET /auteurs avec l'authentification
+//route GET /auteurs avec l'authentification
 auteursRouter.get("/", auth, (req, res) => { // Récupérer tous les auteurs
   Auteur.findAll()
     .then((auteurs) => {

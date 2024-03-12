@@ -1,6 +1,7 @@
 import express from "express";
 import { success, getUniqueId } from "./helper.mjs";
 import { Livre } from "../db/sequelize.mjs";
+import { livres } from "../db/mockup-livres.mjs";
 import { auth } from "../auth/auth.mjs";
 const livresRouter = express();
 
@@ -27,7 +28,7 @@ livresRouter.get("/:id", auth, (req, res) => { // Récupérer un livre par son i
           "Le livre demandé n'existe pas. merci de réessayer avec un autre identifiant.";
         return res.status(404).json({ message });
       }
-      const message = `Le livre dont l'id vaut ${livreId} a bien été récupéré.`
+      const message = `Le livre dont l'id vaut ${req.params.id} a bien été récupéré.`
       res.json(success(message, livre));
     })
     .catch((error) => {
@@ -76,14 +77,22 @@ livresRouter.delete("/:id", auth, (req, res) => { // Supprimer un livre
 
 // route PUT /livres/:id avec authentification
 livresRouter.put("/:id", auth, (req, res) => { // Mettre à jour un livre
-  const livreId = req.params.id;
-  const updatedLivre = req.body;
-  updatedLivre.id = livreId;
-  removeLivre(livreId);
-  addLivre(updatedLivre);
-  // Définir un message pour le consommateur de l'API REST
-  const message = `Le livre ${updatedLivre.name} a bien été mis à jour !`;
-  // Retourner la réponse HTTP en json avec le msg et le livre créé
-  res.json(success(message, updatedLivre));
+  Livre.findByPk(req.params.id)
+    .then((livre) => {
+      if (livre === null) {
+        const message =
+          "Le livre demandé n'existe pas. Merci de réessayer avec un autre identifiant.";
+        return res.status(404).json({ message });
+      }
+      livre.update(req.body);
+      const message = `Le livre ${livre.titre} a bien été mis à jour !`;
+      res.json(success(message, livre));
+    })
+    .catch((error) => {
+      const message =
+        "Le livre n'a pas pu être mis à jour. Merci de réessayer dans quelques instants.";
+      res.status(500).json({ message, data: error });
+    });
 });
+
 export { livresRouter };

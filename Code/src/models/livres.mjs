@@ -69,6 +69,10 @@ const livreModel = (sequelize, DataTypes) => {
             msg: "L'image de couverture ne doit pas être vide",
           }
         }
+      },
+      id_categorie: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       }
     },
     {

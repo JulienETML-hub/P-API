@@ -41,28 +41,28 @@ const Editeur = editeursModel(sequelize, DataTypes);
 
 // Association des tables
 // Un editeur peut avoir plusieurs livres
-Editeur.hasMany(Livre, { foreignKey: "editeurId" });
-Livre.belongsTo(Editeur, { foreignKey: "editeurId" });
+Editeur.hasMany(Livre, { foreignKey: "idEditeur" });
+Livre.belongsTo(Editeur, { foreignKey: "idEditeur" });
 
 // Un auteur peut avoir plusieurs livres
-Auteur.hasMany(Livre, { foreignKey: "auteurId" });
-Livre.belongsTo(Auteur, { foreignKey: "auteurId" });
+Auteur.hasMany(Livre, { foreignKey: "idAuteur" });
+Livre.belongsTo(Auteur, { foreignKey: "idAuteur" });
 
 // une categorie peut avoir plusieurs livres
-Categories.hasMany(Livre, { foreignKey: "categorieId" });
-Livre.belongsTo(Categories, { foreignKey: "categorieId" });
+Categories.hasMany(Livre, { foreignKey: "id_categorie" });
+Livre.belongsTo(Categories, { foreignKey: "id_categorie" });
 
 // Un livre peut avoir plusieurs commentaires
-Livre.hasMany(Commentaire, { foreignKey: "livreId" });
-Commentaire.belongsTo(Livre, { foreignKey: "livreId" });
+Livre.hasMany(Commentaire, { foreignKey: "idLivre" });
+Commentaire.belongsTo(Livre, { foreignKey: "idLivre" });
 
 // Un utilisateur peut avoir plusieurs livres
-Utilisateur.hasMany(Livre, { foreignKey: "utilisateurId" });
-Livre.belongsTo(Utilisateur, { foreignKey: "utilisateurId" });
+Utilisateur.hasMany(Livre, { foreignKey: "id_utilisateur" });
+Livre.belongsTo(Utilisateur, { foreignKey: "id_utilisateur" });
 
 // Un utilisateur peut avoir plusieurs commentaires
-Utilisateur.hasMany(Commentaire, { foreignKey: "utilisateurId" });
-Commentaire.belongsTo(Utilisateur, { foreignKey: "utilisateurId" });
+Utilisateur.hasMany(Commentaire, { foreignKey: "id_utilisateur" });
+Commentaire.belongsTo(Utilisateur, { foreignKey: "id_utilisateur" });
 
 
 // Fonction pour initialiser la base de données
@@ -70,31 +70,17 @@ let initDb = () => {
   return sequelize
     .sync({ force: true }) // Force la synchro => donc supprime les données également
     .then(() => {
-      importUtilisateurs();
       importAuteurs();
       importCategories();
       importEditeurs();
       importLivres();
       importCommentaires();
+      importUtilisateurs();
       console.log("La base de données db_livres a bien été synchronisée");
     });
 };
 
-// Fonction pour importer les livres
-const importLivres = () => {
-  // Importe tous les livres présents dans un fichier ou une source de données
-  livres.map((livre) => {
-    Livre.create({
-      titre: livre.titre,
-      extrait: livre.extrait,
-      resume: livre.resume,
-      anneeEdition: livre.anneeEdition,
-      imageCouverture: livre.imageCouverture
-    }).then((livre) => console.log(livre.toJSON())).catch((error) => {
-      console.error("Erreur lors de la création du livre :", error);
-    });;
-  });
-};
+
 
 // Fonction pour importer les utilisateurs avec mot de passe hashé
 const importUtilisateurs = () => {
@@ -161,5 +147,20 @@ const importEditeurs = () => {
     });
   });
 };
-
-export { sequelize, initDb, Livre, Utilisateur };
+// Fonction pour importer les livres
+const importLivres = () => {
+  // Importe tous les livres présents dans un fichier ou une source de données
+  livres.map((livre) => {
+    Livre.create({
+      titre: livre.titre,
+      extrait: livre.extrait,
+      resume: livre.resume,
+      anneeEdition: livre.anneeEdition,
+      imageCouverture: livre.imageCouverture,
+      id_categorie: livre.id_categorie,
+    }).then((livre) => console.log(livre.toJSON())).catch((error) => {
+      console.error("Erreur lors de la création du livre :", error);
+    });;
+  });
+};
+export { sequelize, initDb, Livre, Utilisateur, Commentaire, Auteur, Categories, Editeur};
