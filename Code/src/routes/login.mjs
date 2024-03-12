@@ -7,7 +7,7 @@ import { privateKey } from "../auth/private_key.mjs";
 
 const loginRouter = express();
 
-// Route de connexion d'un utilisateur
+// Route POST /login pour se connecter
 loginRouter.post("/", (req, res) => {
     User.findOne({ where: { username: req.body.username } }) // Recherche l'utilisateur par son pseudo
         .then((user) => { // Si l'utilisateur n'existe pas
@@ -36,5 +36,6 @@ loginRouter.post("/", (req, res) => {
             return res.json({ message, data: error });
         });
 });
+
 
 export { loginRouter };
