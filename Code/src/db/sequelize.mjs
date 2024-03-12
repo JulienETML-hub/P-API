@@ -1,5 +1,6 @@
 // Importation des modules
 import { Sequelize, DataTypes } from "sequelize";
+import bcrypt from "bcrypt";
 
 //importation des mockup
 import { utilisateurs } from "./mockup-utilisateurs.mjs";
@@ -16,7 +17,6 @@ import { commentaireModel } from "../models/commentaires.mjs";
 import { auteurModel } from "../models/auteurs.mjs";
 import { categorieModel } from "../models/categories.mjs";
 import { editeursModel } from "../models/editeurs.mjs";
-import { UserModel } from "../models/user.mjs";
 
 
 const sequelize = new Sequelize(
@@ -70,12 +70,12 @@ let initDb = () => {
   return sequelize
     .sync({ force: true }) // Force la synchro => donc supprime les données également
     .then(() => {
-      importLivres();
       importUtilisateurs();
-      importCommentaires();
       importAuteurs();
       importCategories();
       importEditeurs();
+      importLivres();
+      importCommentaires();
       console.log("La base de données db_livres a bien été synchronisée");
     });
 };
@@ -96,20 +96,21 @@ const importLivres = () => {
   });
 };
 
-// Fonction pour importer les utilisateurs
+// Fonction pour importer les utilisateurs avec mot de passe hashé
 const importUtilisateurs = () => {
-  bcrypt
-    .hash("etml", 10) // temps pour hasher = du sel
-    .then((hash) =>
+  // Importe tous les utilisateurs présents dans un fichier ou une source de données
+  utilisateurs.map((utilisateur) => {
+    bcrypt.hash(utilisateur.motDePasse, 10).then((hash) => {
       Utilisateur.create({
-        pseudo: "etml",
+        pseudo: utilisateur.pseudo,
         motDePasse: hash,
-        dateEnregistrement: new Date(),
-      })
-    )
-    .then((utilisateur) => console.log(utilisateur.toJSON()));
-};
-
+        dateEnregistrement: utilisateur.dateEnregistrement
+      }).then((utilisateur) => console.log(utilisateur.toJSON())).catch((error) => {
+        console.error("Erreur lors de la création de l'utilisateur :", error);
+      });
+    });
+  });
+};  
 
 // Fonction pour importer les commentaires
 const importCommentaires = () => {

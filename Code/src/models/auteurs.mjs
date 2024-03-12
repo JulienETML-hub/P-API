@@ -2,7 +2,7 @@ const auteurModel = (sequelize, DataTypes) => {
     return sequelize.define(
         "Auteur",
         {
-            idAuteur: {
+            idAuteur: { 
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
