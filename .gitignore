@@ -1,4 +1,9 @@
-/P-API
+# Dossier node_modules à la racine du projet
+node_modules/
+
+# Dossier node_modules dans le dossier P-API
+/P-API/node_modules/
+
 # Build and Release Folders
 bin-debug/
 bin-release/
@@ -7,7 +12,6 @@ bin-release/
 
 # Other files and folders
 .settings/
-.node_modules/
 
 # Executables
 *.swf
