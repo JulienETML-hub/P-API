@@ -2,7 +2,7 @@
 node_modules/
 
 # Dossier node_modules dans le dossier P-API
-/P-API/node_modules/
+/P-API/code/node_modules/
 
 # Build and Release Folders
 bin-debug/
