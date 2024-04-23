@@ -7,18 +7,5 @@
 # Ignore les fichiers Markdown
 *.md
 
-# Ignore le dossier node_modules dans le répertoire Code de ton projet P-API
-P-API/Code/node_modules/*
-
-# Ignore les fichiers générés par les environnements de développement
-/build
-/dist
-/out
-/.next
-
-# Ignore les dépendances spécifiques à un environnement
-/.idea
-.vscode
-
-# Ignore les fichiers de cache
-.cache
+# Ignore le dossier node_modules et tous ses contenus dans le répertoire Code de ton projet P-API
+P-API/Code/node_modules/**
