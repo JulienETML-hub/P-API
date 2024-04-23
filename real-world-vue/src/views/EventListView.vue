@@ -10,7 +10,7 @@ export default {
   mounted() {
     // Effectuer une requête GET pour récupérer la liste des livres depuis ton API
     axios
-      .get('http://localhost:3000/api/livres/2')
+      .get('http://localhost:3000/api/livres/1')
       .then((response) => {
         this.livres = response.data
       })
@@ -24,7 +24,7 @@ export default {
   <div>
     <h1>Liste des Livres</h1>
     <ul>
-      <li v-for="livre in livres" :key="livre.idLivre">{{ livre.titre }}</li>
+      <li v-for="livre in livres" :key="livre.idLivre">{{ livre.titre }} - {{ livre.anneeEdition }}</li>
     </ul>
   </div>
 </template>
