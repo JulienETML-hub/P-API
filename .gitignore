@@ -8,7 +8,7 @@
 *.md
 
 # Ignore le dossier node_modules dans le répertoire Code de ton projet P-API
-P-API/Code/node_modules/
+P-API/Code/node_modules/*
 
 # Ignore les fichiers générés par les environnements de développement
 /build
