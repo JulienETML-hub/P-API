@@ -5,7 +5,7 @@ import { auth } from "../auth/auth.mjs";
 const livresRouter = express();
 
 // route GET /livres avec authentification
-livresRouter.get("/", auth, (req, res) => { // Récupérer tous les livres
+livresRouter.get("/", (req, res) => { // Récupérer tous les livres
   Livre.findAll()
     .then((livres) => {
       const message = "La liste des livres a bien été récupérée.";
@@ -19,7 +19,7 @@ livresRouter.get("/", auth, (req, res) => { // Récupérer tous les livres
 });
 
 // route GET /livres/:id avec authentification
-livresRouter.get("/:id", auth, (req, res) => { // Récupérer un livre par son id 
+livresRouter.get("/:id", (req, res) => { // Récupérer un livre par son id 
   Livre.findByPk(req.params.id)
     .then((livre) => {
       if (livre === null) {
