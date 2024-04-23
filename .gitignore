@@ -7,5 +7,5 @@
 # Ignore les fichiers Markdown
 *.md
 
-# Ignore le dossier node_modules et tous ses contenus dans le répertoire Code de ton projet P-API
-P-API/Code/node_modules/**
+# Ignore le dossier node_modules dans le répertoire Code de ton projet P-API
+P-API/Code/node_modules/
