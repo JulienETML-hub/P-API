@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { initDb, Livre, sequelize } from "./db/sequelize.mjs";
 import { livresRouter } from "./routes/livres.mjs";
 import { loginRouter } from "./routes/login.mjs";
@@ -10,8 +11,10 @@ import { utilisateursRouter } from "./routes/utilisateurs.mjs";
 
 
 const app = express();
+
 app.use(express.json());
-const port = 3000;
+app.use(cors());
+const port = process.env.PORT || 3000;
 
 // Test de connexion à la base de données
 sequelize
