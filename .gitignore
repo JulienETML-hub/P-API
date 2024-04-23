@@ -1,25 +1,24 @@
-# Dossier node_modules à la racine du projet
-node_modules/
+# Ignore les fichiers de configuration locaux
+.env
 
-# Dossier node_modules dans le dossier P-API
-/P-API/code/node_modules/
+# Ignore les fichiers de logs
+*.log
 
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+# Ignore les fichiers Markdown
+*.md
 
-# Other files and folders
-.settings/
+# Ignore le dossier node_modules dans le répertoire Code de ton projet P-API
+P-API/Code/node_modules/
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+# Ignore les fichiers générés par les environnements de développement
+/build
+/dist
+/out
+/.next
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-.db/mockup-utilisateur.mjs
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# Ignore les dépendances spécifiques à un environnement
+/.idea
+.vscode
+
+# Ignore les fichiers de cache
+.cache
