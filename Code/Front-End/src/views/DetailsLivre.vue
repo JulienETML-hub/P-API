@@ -21,9 +21,7 @@ export default {
 }
 </script>
 <template>
-  <header>
-    
-  </header>
+<section>
   <div>
     <h1>Liste des Livres</h1>
 
@@ -33,4 +31,5 @@ export default {
       </li>
     </ul>
   </div>
+</section>
 </template>
