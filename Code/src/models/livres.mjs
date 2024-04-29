@@ -19,6 +19,12 @@ const livreModel = (sequelize, DataTypes) => {
           }
         }
       },
+      epub: {
+        type: DataTypes.BLOB('long'),
+        allowNull: true,
+        validate: {
+        },
+      },
       extrait: {
         type: DataTypes.STRING,
         allowNull: false,

@@ -2,6 +2,12 @@
 import { Sequelize, DataTypes } from "sequelize";
 import bcrypt from "bcrypt";
 
+//Permet de utiliser les outils pour gérere les fichiers
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+ 
+
 //importation des mockup
 import { utilisateurs } from "./mockup-utilisateurs.mjs";
 import { livres } from "./mockup-livres.mjs";
@@ -25,7 +31,7 @@ const sequelize = new Sequelize(
   "root", // Mot de passe de l'utilisateur
   {
     host: "localhost",
-    port: "localhost",// pour les conteneurs docker MySQL
+    port: "6033",// pour les conteneurs docker MySQL
     dialect: "mysql",
     logging: false,
   }
@@ -64,6 +70,16 @@ Livre.belongsTo(Utilisateur, { foreignKey: "id_utilisateur" });
 Utilisateur.hasMany(Commentaire, { foreignKey: "id_utilisateur" });
 Commentaire.belongsTo(Utilisateur, { foreignKey: "id_utilisateur" });
 
+//Permet d'obtenir le chemin du répertoire
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+ 
+//Répertoire fichiers epub
+const folderPath = path.join(__dirname, '../books');
+
+
+
+
 
 // Fonction pour initialiser la base de données
 let initDb = () => {
@@ -73,9 +89,10 @@ let initDb = () => {
       importAuteurs();
       importCategories();
       importEditeurs();
-      importLivres();
+      importLivres(folderPath);
       importCommentaires();
       importUtilisateurs();
+      // importEpub(folderPath);
       console.log("La base de données db_livres a bien été synchronisée");
     });
 };
@@ -148,19 +165,33 @@ const importEditeurs = () => {
   });
 };
 // Fonction pour importer les livres
-const importLivres = () => {
+const importLivres = (folderPath) => {
   // Importe tous les livres présents dans un fichier ou une source de données
-  livres.map((livre) => {
-    Livre.create({
-      titre: livre.titre,
-      extrait: livre.extrait,
-      resume: livre.resume,
-      anneeEdition: livre.anneeEdition,
-      imageCouverture: livre.imageCouverture,
-      id_categorie: livre.id_categorie,
-    }).then((livre) => console.log(livre.toJSON())).catch((error) => {
-      console.error("Erreur lors de la création du livre :", error);
-    });;
+  // Lire les fichiers dans le dossier
+  const files = fs.readdirSync(folderPath);
+   
+  // Parcourir chaque fichier
+  files.forEach(file => {
+    const filePath = path.join(folderPath, file);
+    // Lire le contenu du fichier
+    const epubData = fs.readFileSync(filePath);
+    // Insérer les données dans la base de données
+    livres.map((livre) => {
+      Livre.create({
+        titre: livre.titre,
+        epub: epubData,
+        extrait: livre.extrait,
+        resume: livre.resume,
+        anneeEdition: livre.anneeEdition,
+        imageCouverture: livre.imageCouverture,
+        id_categorie: livre.id_categorie,
+      }).then((livre) => console.log(livre.toJSON())).catch((error) => {
+        console.error("Erreur lors de la création du livre :", error);
+      });;
+    });
   });
-};
+      
+}
+  
+
 export { sequelize, initDb, Livre, Utilisateur, Commentaire, Auteur, Categories, Editeur};
