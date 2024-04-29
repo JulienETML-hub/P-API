@@ -25,7 +25,7 @@ categoriesRouter.get("/", auth, (req, res) => { // Récupérer toutes les catég
 
 
 // route GET /categories/:id permet de récupérer touts les livres d'une catégorie avec l'authentification 
-categoriesRouter.get("/:id/livres/", auth, async (req, res) => {
+categoriesRouter.get("/:id/livres/", async (req, res) => {
   Categories.findByPk(req.params.id)
     .then((categorie) => {
       if (categorie === null) {

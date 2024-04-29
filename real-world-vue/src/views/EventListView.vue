@@ -21,10 +21,16 @@ export default {
 }
 </script>
 <template>
+  <header>
+    
+  </header>
   <div>
     <h1>Liste des Livres</h1>
+
     <ul>
-      <li v-for="livre in livres" :key="livre.idLivre">{{ livre.titre }} - {{ livre.anneeEdition }}</li>
+      <li v-for="livre in livres" :key="livre.idLivre">
+        {{ livre.titre }} - {{ livre.anneeEdition }} {{ livre }}
+      </li>
     </ul>
   </div>
 </template>
