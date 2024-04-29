@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import EventListView from '../views/DetailsLivre.vue'
+import DetailsLivre from '../views/DetailsLivre.vue'
 import AboutView from '../views/AboutView.vue'
 
 const router = createRouter({
