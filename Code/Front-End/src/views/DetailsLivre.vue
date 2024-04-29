@@ -1,7 +1,11 @@
 <script>
 import axios from 'axios'
+import Header from '../components/Header.vue'
 
 export default {
+  components: {
+    Header
+  },
   data() {
     return {
       livres: []
@@ -20,6 +24,7 @@ export default {
   }
 }
 </script>
+
 <template>
 <section>
   <div>
