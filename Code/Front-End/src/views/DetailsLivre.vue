@@ -21,15 +21,49 @@ export default {
 }
 </script>
 <template>
-<section>
-  <div>
-    <h1>Liste des Livres</h1>
+  <section>
+    <div class="partie1">
+      <img src="../assets/imageID1.jpg" alt="Image de couverture du livre" />
+      <h3>Informations :</h3>
+      <ul>
+        <li v-for="livre in livres" :key="livre.idLivre">
+          Titre : {{ livre.titre }} Année d'édition : {{ livre.anneeEdition }}
+        </li>
+      </ul>
+    </div>
 
-    <ul>
-      <li v-for="livre in livres" :key="livre.idLivre">
-        {{ livre.titre }} - {{ livre.anneeEdition }} {{ livre }}
-      </li>
-    </ul>
-  </div>
-</section>
+    <div class="partie2">
+      <p>partie2</p>
+    </div>
+    <div class="partie3">
+      <h1>Liste des Livres</h1>
+
+      <ul>
+        <li v-for="livre in livres" :key="livre.idLivre">
+          {{ livre.titre }} - {{ livre.anneeEdition }}
+        </li>
+      </ul>
+    </div>
+  </section>
 </template>
+<style>
+section {
+  display: grid;
+  grid-template-areas: 'partie1 partie2 partie3' 'partie1 partie2 partie3';
+}
+.partie1 {
+  background-color: rgb(44, 106, 149);
+  grid-area: partie1;
+}
+.partie2 {
+  background-color: rgb(37, 90, 133);
+  grid-area: partie2;
+}
+.partie3 {
+  background-color: rgb(27, 79, 121);
+  grid-area: partie3;
+}
+h3 {
+  color: white;
+}
+</style>
