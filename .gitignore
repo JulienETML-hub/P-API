@@ -3,6 +3,7 @@
 
 # Ignore les fichiers de logs
 *.log
+*.json
 
 # Ignore les fichiers Markdown
 *.md

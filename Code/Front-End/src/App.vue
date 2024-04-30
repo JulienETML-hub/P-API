@@ -1,18 +1,13 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import axios from 'axios';
+import Header from './components/Header.vue'
 </script>
 
 <template>
   <div id="layout">
     <header>
-      <div class="wrapper">
-        <HelloWorld msg="You did it!" />
-        <nav>
-          <RouterLink to="/">Events </RouterLink>
-          <RouterLink to="/about"> About</RouterLink>
-        </nav>
-      </div>
+      <Header />
     </header>
 
     <!-- Ajout de BookList.vue -->
