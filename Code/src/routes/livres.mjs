@@ -97,4 +97,23 @@ livresRouter.put("/:id", auth, (req, res) => { // Mettre à jour un livre
     });
 });
 
+livresRouter.get("/:id/commentaires", (req, res) => { // Récupérer les livres d'une catégorie
+  Livre.findByPk(req.params.id, { include: "commentaires" }) // On inclut les livres de la catégorie
+    .then((livre) => { // Si la catégorie n'existe pas
+      if (livre === null) { // On renvoie un message d'erreur
+        const message =
+          "La catégorie demandée n'existe pas. Merci de réessayer avec un autre identifiant.";
+        return res.status(404).json({ message });
+      } // Si la catégorie existe on renvoie les livres de la catégorie
+      const message = `Les livres de la catégorie ${livre.nom} ont bien été récupérés.`;
+      res.json(success(message, livre.commentaires));
+    }
+    )
+    .catch((error) => { // Si une erreur survient on renvoie un message d'erreur
+      const message =
+        "Les livres de la catégorie n'ont pas pu être récupérés. Merci de réessayer dans quelques instants.";
+      res.status(500).json({ message, data: error });
+    });
+}
+);
 export { livresRouter };

@@ -10,7 +10,7 @@ import { Commentaire } from "../db/sequelize.mjs";
 const commentairesRouter = express();
 
 // route GET /commentaires avec l'authentification
-commentairesRouter.get("/", auth, (req, res) => { // Récupérer la liste des commentaires
+commentairesRouter.get("/", (req, res) => { // Récupérer la liste des commentaires
   Commentaire.findAll()
     .then((commentaires) => {
       const message = "La liste des commentaires a bien été récupérée.";
@@ -24,7 +24,7 @@ commentairesRouter.get("/", auth, (req, res) => { // Récupérer la liste des co
 });
 
 // route GET /commentaires/:id avec l'authentification
-commentairesRouter.get("/:id", auth, (req, res) => { // Récupérer un commentaire par son id
+commentairesRouter.get("/:id", (req, res) => { // Récupérer un commentaire par son id
   Commentaire.findByPk(req.params.id)
     .then((commentaire) => {
       if (commentaire === null) {

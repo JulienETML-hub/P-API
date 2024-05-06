@@ -25,7 +25,8 @@ import Header from './components/Header.vue'
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #050505;
+  text-decoration: none;
 }
 nav {
   padding: 30px;
@@ -37,4 +38,5 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b982;
 }
+
 </style>

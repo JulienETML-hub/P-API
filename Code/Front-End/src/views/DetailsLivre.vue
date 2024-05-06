@@ -8,19 +8,35 @@ export default {
   },
   data() {
     return {
-      livres: []
+      livres: [],
+      commentaires: []
     }
   },
   mounted() {
-    // Effectuer une requête GET pour récupérer la liste des livres depuis ton API
-    axios
-      .get('http://localhost:3000/api/livres/1')
-      .then((response) => {
-        this.livres = response.data
-      })
-      .catch((error) => {
-        console.error('Erreur lors de la récupération des livres :', error)
-      })
+    this.getBooksById(2)
+    this.getComments(1)
+  },
+  methods: {
+    getBooksById(id) {
+      axios
+        .get('http://localhost:3000/api/livres/1')
+        .then((response) => {
+          this.livres = response.data
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la récupération des livres :', error)
+        })
+    },
+    getComments(id) {
+      axios
+        .get(`http://localhost:3000/api/commentaires/${id}`)
+        .then((response) => {
+          this.commentaires = response.data
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la récupération des commentaires :', error)
+        })
+    }
   }
 }
 </script>
@@ -32,22 +48,24 @@ export default {
       <h3>Informations :</h3>
       <ul>
         <li v-for="livre in livres" :key="livre.idLivre">
-          Titre : {{ livre.titre }} Année d'édition : {{ livre.anneeEdition }}
+          <!-- Afficher chaque propriété du livre si elle a une valeur -->
+          <p v-if="livre.titre">Titre : {{ livre.titre }}</p>
+          <p v-if="livre.anneeEdition">Année d'édition : {{ livre.anneeEdition }}</p>
+          <p v-if="livre.extrait">Nombre de page : {{ livre.extrait }}</p>
+          <p v-if="livre.resume">Auteur : {{ livre.author }}</p>
         </li>
       </ul>
     </div>
 
-    <div class="partie2">
-      <p>partie2</p>
-    </div>
-    <div class="partie3">
-      <h1>Liste des Livres</h1>
+    <div class="partie2" v-for="livre in livres" :key="livre.idLivre">
+      <h2>Résumé</h2>
+      <p v-if="livre.titre">{{ livre.resume }}</p>
 
-      <ul>
-        <li v-for="livre in livres" :key="livre.idLivre">
-          {{ livre.titre }} - {{ livre.anneeEdition }}
-        </li>
-      </ul>
+      <a href="https://www.w3schools.com/">Extrait</a>
+    </div>
+    <div class="partie3" v-for="commentaire in commentaires" :key="commentaire.idCommentaire">
+      <h2>Appréciations des lecteurs</h2>
+      <p v-if="commentaire.idCommentaire">{{ commentaire.contenu }}</p>
     </div>
   </section>
 </template>
@@ -55,10 +73,15 @@ export default {
 section {
   display: grid;
   grid-template-areas: 'partie1 partie2 partie3' 'partie1 partie2 partie3';
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: white;
+  line-height: 140%;
+  letter-spacing: 0.5px;
 }
 .partie1 {
   background-color: rgb(44, 106, 149);
   grid-area: partie1;
+  display: grid;
 }
 .partie2 {
   background-color: rgb(37, 90, 133);
@@ -70,5 +93,27 @@ section {
 }
 h3 {
   color: white;
+}
+.partie1 img {
+  margin: auto;
+}
+.partie1 ul {
+  list-style: none;
+  text-align: left;
+  margin: auto;
+}
+.partie1 p {
+  color: white;
+  font-size: medium;
+}
+
+.partie2 p {
+  margin: auto;
+  width: 70%;
+}
+.partie2 a {
+  background-color: green;
+  color: white;
+  font-size: large;
 }
 </style>

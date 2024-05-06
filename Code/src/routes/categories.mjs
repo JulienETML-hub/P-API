@@ -72,7 +72,7 @@ categoriesRouter.post("/", auth, (req, res) => { // Créer une catégorie
 
 // route DELETE /categories/:id avec l'authentification
 categoriesRouter.delete("/:id", auth, (req, res) => { // Supprimer une catégorie
-  Categorie.findByPk(req.params.id)
+  Categories.findByPk(req.params.id)
     .then((categorie) => {
       if (categorie === null) {
         const message =
@@ -99,7 +99,7 @@ categoriesRouter.delete("/:id", auth, (req, res) => { // Supprimer une catégori
 
 // route GET /categories/:id/livres avec l'authentification, route imbriquée
 categoriesRouter.get("/:id/livres", auth, (req, res) => { // Récupérer les livres d'une catégorie
-  Categorie.findByPk(req.params.id, { include: "livres" }) // On inclut les livres de la catégorie
+  Categories.findByPk(req.params.id, { include: "livres" }) // On inclut les livres de la catégorie
     .then((categorie) => { // Si la catégorie n'existe pas
       if (categorie === null) { // On renvoie un message d'erreur
         const message =
@@ -117,6 +117,26 @@ categoriesRouter.get("/:id/livres", auth, (req, res) => { // Récupérer les liv
     });
 }
 );
+
+
+// route GET /livres/:id avec authentification
+categoriesRouter.get("/:id", (req, res) => { // Récupérer un livre par son id 
+  Categories.findByPk(req.params.id)
+    .then((categorie) => {
+      if (categorie === null) {
+        const message =
+          "Le livre demandé n'existe pas. merci de réessayer avec un autre identifiant.";
+        return res.status(404).json({ message });
+      }
+      const message = `Le livre dont l'id vaut ${req.params.id} a bien été récupéré.`
+      res.json(success(message, categorie));
+    })
+    .catch((error) => {
+      const message =
+        "Le livre n'a pas pu être récupéré. merci de réessayer dans quelques instants.";
+      res.status(500).json({ message, data: error });
+    });
+});
 
 
 
