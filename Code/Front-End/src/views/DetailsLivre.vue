@@ -1,41 +1,42 @@
 <script>
 import axios from 'axios'
 import Header from '../components/Header.vue'
-
 export default {
   components: {
     Header
   },
   data() {
     return {
-      livres: [],
-      commentaires: []
+      livres: null,
+      commentaires: null,
+      comment: null
     }
   },
-  mounted() {
-    this.getBooksById(2)
-    this.getComments(1)
+  async mounted() {
+    await this.getBooksById(2)
   },
   methods: {
-    getBooksById(id) {
-      axios
-        .get('http://localhost:3000/api/livres/1')
-        .then((response) => {
-          this.livres = response.data
-        })
-        .catch((error) => {
-          console.error('Erreur lors de la récupération des livres :', error)
-        })
+    async getBooksById(id) {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/livres/${id}`);
+        this.livres = response.data;
+       /* if (this.livres != null) {
+          console.log('aaaa' + this.livres.data.resume);
+        } else {
+          console.log('bbbb');
+        }*/
+        await this.getComments(this.livres.data.id_categorie);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des livres :', error);
+      }
     },
-    getComments(id) {
-      axios
-        .get(`http://localhost:3000/api/commentaires/${id}`)
-        .then((response) => {
-          this.commentaires = response.data
-        })
-        .catch((error) => {
-          console.error('Erreur lors de la récupération des commentaires :', error)
-        })
+    async getComments(commentId) {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/commentaires/${commentId}`)
+        this.commentaires = response.data
+      } catch (error) {
+        console.error('Erreur lors de la récupération des commentaires :', error)
+      }
     }
   }
 }
@@ -59,13 +60,13 @@ export default {
 
     <div class="partie2" v-for="livre in livres" :key="livre.idLivre">
       <h2>Résumé</h2>
-      <p v-if="livre.titre">{{ livre.resume }}</p>
+      <p>{{ livres.data.resume }}</p>
 
       <a href="https://www.w3schools.com/">Extrait</a>
     </div>
     <div class="partie3" v-for="commentaire in commentaires" :key="commentaire.idCommentaire">
       <h2>Appréciations des lecteurs</h2>
-      <p v-if="commentaire.idCommentaire">{{ commentaire.contenu }}</p>
+      <p>{{ commentaires.data.contenu }}</p>
     </div>
   </section>
 </template>
