@@ -85,7 +85,7 @@ commentairesRouter.delete("/:id", auth, (req, res) => { // Supprimer un commenta
 
 // route GET /commentaires/livre/:livreId
 commentairesRouter.get("/livre/:livreId", (req, res) => { // Récupérer tous les commentaires d'un livre spécifique
-  Commentaire.findAll({ where: { livreId: req.params.livreId } })
+  Commentaire.findAll({ where: { idLivre: req.params.livreId } })
     .then((commentaires) => {
       if (commentaires.length === 0) {
         const message =

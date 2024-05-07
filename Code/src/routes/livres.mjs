@@ -96,7 +96,7 @@ livresRouter.put("/:id", auth, (req, res) => { // Mettre à jour un livre
       res.status(500).json({ message, data: error });
     });
 });
-
+/*
 livresRouter.get("/:id/commentaires", (req, res) => { // Récupérer les livres d'une catégorie
   Livre.findByPk(req.params.id, { include: "commentaires" }) // On inclut les livres de la catégorie
     .then((livre) => { // Si la catégorie n'existe pas
@@ -115,5 +115,5 @@ livresRouter.get("/:id/commentaires", (req, res) => { // Récupérer les livres 
       res.status(500).json({ message, data: error });
     });
 }
-);
+);*/
 export { livresRouter };

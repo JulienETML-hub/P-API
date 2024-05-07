@@ -105,6 +105,7 @@ const importCommentaires = () => {
     Commentaire.create({
       contenu: commentaire.contenu,
       appreciation: commentaire.appreciation,
+      idLivre: commentaire.idLivre
     }).then((commentaire) => console.log(commentaire.toJSON())).catch((error) => {
       console.error("Erreur lors de la création du commentaire :", error);
     });

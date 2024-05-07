@@ -73,7 +73,8 @@ const livreModel = (sequelize, DataTypes) => {
       id_categorie: {
         type: DataTypes.INTEGER,
         allowNull: false,
-      }
+      },
+
     },
     {
       timestamps: true,

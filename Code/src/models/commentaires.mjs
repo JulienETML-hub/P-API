@@ -33,7 +33,12 @@ const commentaireModel = (sequelize, DataTypes) => {
                         msg: "L'appréciation doit être un nombre entier",
                     }
                 }
-            }
+            },
+            idLivre: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+              },
+            
         },
         {
             timestamps: false,
