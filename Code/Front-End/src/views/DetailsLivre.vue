@@ -25,14 +25,15 @@ export default {
         } else {
           console.log('bbbb');
         }*/
-        await this.getComments(this.livres.data.id_categorie);
+        await this.getComments(2);
       } catch (error) {
         console.error('Erreur lors de la récupération des livres :', error);
       }
     },
     async getComments(commentId) {
       try {
-        const response = await axios.get(`http://localhost:3000/api/commentaires/${commentId}`)
+        const response = await axios.get(`http://localhost:3000/api/commentaires/livre/${commentId}`)
+        //const response = await axios.get(`http://localhost:3000/api/livres/${commentId}/commentaires`)
         this.commentaires = response.data
       } catch (error) {
         console.error('Erreur lors de la récupération des commentaires :', error)
@@ -66,14 +67,14 @@ export default {
     </div>
     <div class="partie3" v-for="commentaire in commentaires" :key="commentaire.idCommentaire">
       <h2>Appréciations des lecteurs</h2>
-      <p>{{ commentaires.data.contenu }}</p>
+      <p>{{ commentaires.data[1].contenu }}</p>
     </div>
   </section>
 </template>
 <style>
 section {
   display: grid;
-  grid-template-areas: 'partie1 partie2 partie3' 'partie1 partie2 partie3';
+  grid-template-areas: 'partie1 partie2 partie3';
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   color: white;
   line-height: 140%;
@@ -87,10 +88,12 @@ section {
 .partie2 {
   background-color: rgb(37, 90, 133);
   grid-area: partie2;
+
 }
 .partie3 {
   background-color: rgb(27, 79, 121);
   grid-area: partie3;
+
 }
 h3 {
   color: white;
@@ -110,7 +113,7 @@ h3 {
 
 .partie2 p {
   margin: auto;
-  width: 70%;
+  width: 33%;
 }
 .partie2 a {
   background-color: green;
