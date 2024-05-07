@@ -18,21 +18,23 @@ export default {
   methods: {
     async getBooksById(id) {
       try {
-        const response = await axios.get(`http://localhost:3000/api/livres/${id}`);
-        this.livres = response.data;
-       /* if (this.livres != null) {
+        const response = await axios.get(`http://localhost:3000/api/livres/${id}`)
+        this.livres = response.data
+        /* if (this.livres != null) {
           console.log('aaaa' + this.livres.data.resume);
         } else {
           console.log('bbbb');
         }*/
-        await this.getComments(2);
+        await this.getComments(2)
       } catch (error) {
-        console.error('Erreur lors de la récupération des livres :', error);
+        console.error('Erreur lors de la récupération des livres :', error)
       }
     },
     async getComments(commentId) {
       try {
-        const response = await axios.get(`http://localhost:3000/api/commentaires/livre/${commentId}`)
+        const response = await axios.get(
+          `http://localhost:3000/api/commentaires/livre/${commentId}`
+        )
         //const response = await axios.get(`http://localhost:3000/api/livres/${commentId}/commentaires`)
         this.commentaires = response.data
       } catch (error) {
@@ -67,7 +69,25 @@ export default {
     </div>
     <div class="partie3" v-for="commentaire in commentaires" :key="commentaire.idCommentaire">
       <h2>Appréciations des lecteurs</h2>
-      <p>{{ commentaires.data[1].contenu }}</p>
+      <p>{{ commentaires.data[0].appreciation }}</p>
+      <form>
+        <div>
+          <label for="appreciation">A combien apprécier vous ce livre ?</label>
+          <input
+            id="appreciation"
+            type="number"
+            name="appreciation"
+            step="1"
+            min="0"
+            max="5"
+            required
+          />
+          <span class="validity"></span>
+        </div>
+        <div>
+          <input type="submit" />
+        </div>
+      </form>
     </div>
   </section>
 </template>
@@ -88,12 +108,10 @@ section {
 .partie2 {
   background-color: rgb(37, 90, 133);
   grid-area: partie2;
-
 }
 .partie3 {
   background-color: rgb(27, 79, 121);
   grid-area: partie3;
-
 }
 h3 {
   color: white;
