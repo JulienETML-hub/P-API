@@ -2,6 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import axios from 'axios';
 import Header from './components/Header.vue'
+import FormAppreciation from './views/FormAppreciation.vue';
 </script>
 
 <template>

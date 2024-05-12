@@ -43,7 +43,7 @@ commentairesRouter.get("/:id", (req, res) => { // Récupérer un commentaire par
 });
 
 // route POST /commentaires avec l'authentification
-commentairesRouter.post("/", auth, (req, res) => { // Créer un commentaire
+commentairesRouter.post("/", (req, res) => { // Créer un commentaire
   Commentaire.create(req.body)
     .then((createdCommentaire) => {
       const message = `Le commentaire ${createdCommentaire.contenu} a bien été créé !`;

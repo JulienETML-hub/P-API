@@ -1,9 +1,11 @@
 <script>
 import axios from 'axios'
 import Header from '../components/Header.vue'
+import FormAppreciation from './FormAppreciation.vue'
 export default {
   components: {
-    Header
+    Header,
+    FormAppreciation
   },
   data() {
     return {
@@ -70,7 +72,7 @@ export default {
     <div class="partie3" v-for="commentaire in commentaires" :key="commentaire.idCommentaire">
       <h2>Appréciations des lecteurs</h2>
       <p>{{ commentaires.data[0].appreciation }}</p>
-      <form>
+      <!-- <form>
         <div>
           <label for="appreciation">A combien apprécier vous ce livre ?</label>
           <input
@@ -87,7 +89,9 @@ export default {
         <div>
           <input type="submit" />
         </div>
-      </form>
+       
+      </form>-->
+      <FormAppreciation></FormAppreciation>
     </div>
   </section>
 </template>
