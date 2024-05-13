@@ -1,4 +1,12 @@
+<script>
+import OuvrageRecent from '../Partial/OuvrageRecent.vue'
 
+export default{
+    components: {
+        OuvrageRecent
+    }
+}
+</script>
 
 <template>
   <section>
@@ -16,13 +24,9 @@
 </template>
 
 <style scoped>
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-}
 #banniere{
-    margin-top: 80 px;
-    margin-bottom: 100px;
+    display: grid;
+    grid-template-columns: 5fr 4fr 5fr;
 }
 #rec1, #rec2, #rec3 {
   height: 320px; 
@@ -31,8 +35,11 @@
     background-color: #269968;
 }
 #rec2{
+    height: 300px;
     background-color: #4BCC95;
-    padding: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
     text-align: justify;
     text-align: center;
 }

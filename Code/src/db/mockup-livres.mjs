@@ -6,7 +6,7 @@ let livres =  // Tableau de livres
     extrait: "chemin/vers/annakarenine.pdf",
     resume: "Le drame de ladultere dAnna Karenine, qui entraine des consequences tragiques dans la haute societe russe.",
     anneeEdition: 1877,
-    imageCouverture: "chemin/vers/annakarenine.jpg",
+    imageCouverture: "@/assets/annakarenine.jpg",
     id_categorie: 1,
   },
   {
@@ -15,7 +15,7 @@ let livres =  // Tableau de livres
     extrait: "chemin/vers/leproces.pdf",
     resume: "Joseph K. est accuse dun crime mysterieux et se retrouve pris dans un systeme judiciaire kafkaïen.",
     anneeEdition: 1925,
-    imageCouverture: "chemin/vers/leproces.jpg",
+    imageCouverture: "@/assets/leproces.jpg",
     id_categorie: 2,
   },
   {
