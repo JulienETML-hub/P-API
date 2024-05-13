@@ -11,7 +11,7 @@ export default {
     return {
       livres: null,
       commentaires: null,
-      moyenneA:null,
+      moyenneA: null,
       comment: null,
       livreId: null
     }
@@ -57,16 +57,8 @@ export default {
       this.livreId = 3
       console.log(this.livreId)
     }
-  },
-  props: {
-    livreId: {
-      type: Number, // Le type de donnée peut être ajusté selon vos besoins
-      required: true
-    }
   }
 }
-
-
 </script>
 
 <template>
@@ -156,6 +148,6 @@ h3 {
   font-size: large;
 }
 .partie3 p {
-  text-decoration:underline;
+  text-decoration: underline;
 }
 </style>
