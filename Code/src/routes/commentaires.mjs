@@ -102,5 +102,28 @@ commentairesRouter.get("/livre/:livreId", (req, res) => { // Récupérer tous le
     });
 });
 
+commentairesRouter.get("/livre/:livreId/moyenneA", (req, res) => { // Récupérer tous les commentaires d'un livre spécifique
+  Commentaire.findAll({ where: { idLivre: req.params.livreId } })
+    .then((commentaires) => {
+      if (commentaires.length === 0) {
+        const message =
+          "Il n'y a pas de commentaires pour ce livre. Merci de réessayer avec un autre identifiant de livre.";
+        return res.status(404).json({ message });
+      }
+      // Calcul de la moyenne des appréciations
+      const totalAppreciation = commentaires.reduce((acc, cur) => acc + cur.appreciation, 0);
+      const moyenneAppreciation = totalAppreciation / commentaires.length;
+      const moyenneFormatted = moyenneAppreciation.toFixed(1);
+
+      const message = `La moyenne des appréciations pour le livre dont l'id vaut ${req.params.livreId} est ${moyenneFormatted}`;
+      res.json({ message, moyenneAppreciation: parseFloat(moyenneFormatted) });
+    })
+    .catch((error) => {
+      const message =
+        "Les commentaires pour ce livre n'ont pas pu être récupérés. Merci de réessayer dans quelques instants.";
+      res.status(500).json({ message, data: error });
+    });
+});
+
 // Exportation du routeur
 export { commentairesRouter };

@@ -11,6 +11,7 @@ export default {
     return {
       livres: null,
       commentaires: null,
+      moyenneA: null,
       comment: null,
       livreId: null
     }
@@ -40,8 +41,12 @@ export default {
         const response = await axios.get(
           `http://localhost:3000/api/commentaires/livre/${commentId}`
         )
+        const response2 = await axios.get(
+          `http://localhost:3000/api/commentaires/livre/${commentId}/moyenneA`
+        )
         //const response = await axios.get(`http://localhost:3000/api/livres/${commentId}/commentaires`)
         this.commentaires = response.data
+        this.moyenneA = response2.data
       } catch (error) {
         console.error('Erreur lors de la récupération des commentaires :', error)
       }
@@ -52,16 +57,8 @@ export default {
       this.livreId = 3
       console.log(this.livreId)
     }
-  },
-  props: {
-    livreId: {
-      type: Number, // Le type de donnée peut être ajusté selon vos besoins
-      required: true
-    }
   }
 }
-
-
 </script>
 
 <template>
@@ -98,7 +95,7 @@ export default {
     </div>
     <div class="partie3" v-for="commentaire in commentaires" :key="commentaire.idCommentaire">
       <h2>Appréciations des lecteurs</h2>
-      <p>{{ commentaires.data[0].appreciation }}</p>
+      <p>{{ moyenneA.moyenneAppreciation }}</p>
       <FormAppreciation :livreId="livres.data.idLivre"></FormAppreciation>
     </div>
   </section>
@@ -149,5 +146,8 @@ h3 {
   background-color: green;
   color: white;
   font-size: large;
+}
+.partie3 p {
+  text-decoration: underline;
 }
 </style>

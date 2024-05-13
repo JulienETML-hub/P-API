@@ -72,7 +72,7 @@ div {
   background-color: rgb(77, 122, 73);
   border-radius: 10px;
   width: 80%;
-  height: 60%;
+  height: 50%;
   margin: auto;
 }
 div input,
