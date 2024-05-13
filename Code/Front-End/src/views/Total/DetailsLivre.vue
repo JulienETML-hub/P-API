@@ -1,7 +1,7 @@
 <script>
 import axios from 'axios'
-import Header from '../components/Header.vue'
-import FormAppreciation from './FormAppreciation.vue'
+import Header from '@/components/Header.vue'
+import FormAppreciation from '@/views/Partial/FormAppreciation.vue'
 export default {
   components: {
     Header,
