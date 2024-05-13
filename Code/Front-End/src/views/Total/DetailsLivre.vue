@@ -67,7 +67,7 @@ export default {
 <template>
   <section>
     <div class="partie1">
-      <img src="../assets/imageID1.jpg" alt="Image de couverture du livre" />
+      <img src="../../assets/imageID1.jpg" alt="Image de couverture du livre" />
       <h3>Informations :</h3>
       <ul>
         <li v-for="livre in livres" :key="livre.idLivre">
