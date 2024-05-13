@@ -2,6 +2,7 @@
 import axios from 'axios'
 import Header from '../components/Header.vue'
 import FormAppreciation from './FormAppreciation.vue'
+
 export default {
   components: {
     Header,
@@ -11,11 +12,14 @@ export default {
     return {
       livres: null,
       commentaires: null,
-      comment: null
+      comment: null,
+      livreId: null
     }
   },
   async mounted() {
-    await this.getBooksById(2)
+    console.log(this.livreId)
+
+    await this.getBooksById(this.livreId)
   },
   methods: {
     async getBooksById(id) {
@@ -27,7 +31,7 @@ export default {
         } else {
           console.log('bbbb');
         }*/
-        await this.getComments(2)
+        await this.getComments(id)
       } catch (error) {
         console.error('Erreur lors de la récupération des livres :', error)
       }
@@ -42,9 +46,23 @@ export default {
       } catch (error) {
         console.error('Erreur lors de la récupération des commentaires :', error)
       }
+    },
+    async SelectionLivre(event) {
+      event.preventDefault()
+      this.getBooksById(this._idLivre)
+      this.livreId = 3
+      console.log(this.livreId)
+    }
+  },
+  props: {
+    livreId: {
+      type: Number, // Le type de donnée peut être ajusté selon vos besoins
+      required: true
     }
   }
 }
+
+
 </script>
 
 <template>
@@ -61,6 +79,16 @@ export default {
           <p v-if="livre.resume">Auteur : {{ livre.author }}</p>
         </li>
       </ul>
+      <form @submit="SelectionLivre">
+        <div>
+          <label for="_idLivre">ID livre : </label>
+          <input v-model="_idLivre" placeholder="Entrez l'id d'un livre" />
+          <span class="validity"></span>
+        </div>
+        <div>
+          <input type="submit" />
+        </div>
+      </form>
     </div>
 
     <div class="partie2" v-for="livre in livres" :key="livre.idLivre">
@@ -72,26 +100,7 @@ export default {
     <div class="partie3" v-for="commentaire in commentaires" :key="commentaire.idCommentaire">
       <h2>Appréciations des lecteurs</h2>
       <p>{{ commentaires.data[0].appreciation }}</p>
-      <!-- <form>
-        <div>
-          <label for="appreciation">A combien apprécier vous ce livre ?</label>
-          <input
-            id="appreciation"
-            type="number"
-            name="appreciation"
-            step="1"
-            min="0"
-            max="5"
-            required
-          />
-          <span class="validity"></span>
-        </div>
-        <div>
-          <input type="submit" />
-        </div>
-       
-      </form>-->
-      <FormAppreciation></FormAppreciation>
+      <FormAppreciation :livreId="livres.data.idLivre"></FormAppreciation>
     </div>
   </section>
 </template>
