@@ -18,6 +18,20 @@ livresRouter.get("/", (req, res) => { // Récupérer tous les livres
     });
 });
 
+// route GET /livres/recent 
+livresRouter.get("/recent", (req, res) => { // Récupérer les 5 derniers livres
+  Livre.findAll({ order: [["created_at", "DESC"]], limit: 5 })
+    .then((livres) => {
+      const message = "Les 5 derniers livres ont bien été récupérés.";
+      res.json(success(message, livres));
+    })
+    .catch((error) => {
+      const message =
+        "Les 5 derniers livres n'ont pas pu être récupérés. Merci de réessayer dans quelques instants.";
+      res.status(500).json({ message, data: error });
+    });
+});
+
 // route GET /livres/:id avec authentification
 livresRouter.get("/:id", (req, res) => { // Récupérer un livre par son id 
   Livre.findByPk(req.params.id)
@@ -117,17 +131,5 @@ livresRouter.get("/:id/commentaires", (req, res) => { // Récupérer les livres 
 }
 );*/
 
-// route GET /livres/recent 
-livresRouter.get("/recent", (req, res) => { // Récupérer les 5 derniers livres
-  Livre.findAll({ order: [["createdAt", "DESC"]], limit: 5 })
-    .then((livres) => {
-      const message = "Les 5 derniers livres ont bien été récupérés.";
-      res.json(success(message, livres));
-    })
-    .catch((error) => {
-      const message =
-        "Les 5 derniers livres n'ont pas pu être récupérés. Merci de réessayer dans quelques instants.";
-      res.status(500).json({ message, data: error });
-    });
-});
+
 export { livresRouter };

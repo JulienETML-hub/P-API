@@ -1,22 +1,22 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import axios from 'axios';
-import Header from './components/Header.vue'
-import AddOuvrage from './views/Partial/AddOuvrage.vue';
+<script>
+import Header from '../src/components/Header.vue'
+import Home from './views/Total/Home.vue'
+import Footer from '../src/components/Footer.vue'
+
+export default {
+  components: {
+    Header,
+    Home,
+    Footer
+  }
+}
 </script>
 
 <template>
-  <div id="layout">
-    <header>
-      <Header />
-    </header>
-
-    <!-- Ajout de BookList.vue -->
-    <main>
-      <BookList />
-    </main>
-    
-    <RouterView />
+  <div>
+    <Header />
+    <Home />
+    <Footer />
   </div>
 </template>
 
