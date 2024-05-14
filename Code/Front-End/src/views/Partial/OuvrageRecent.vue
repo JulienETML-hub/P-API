@@ -44,6 +44,9 @@ p{
   height: 300px;
   object-fit: cover;
 }
+.livre{
+  padding: 5px;
+}
 .livres-container {
   width: 100%;
   display: flex;
