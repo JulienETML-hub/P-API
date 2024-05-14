@@ -1,15 +1,32 @@
+<script>
+import axios from 'axios'
+import AddOuvrage from '@/views/Partial/AddOuvrage.vue'
+
+export default {
+  components: {
+    AddOuvrage
+  },
+  data() {
+    return {
+      test:null,
+    }
+  }
+}
+
+</script>
+
 <template>
   <div class="about">
     <h1>A site for events to better the world.</h1>
+    <AddOuvrage></AddOuvrage>
   </div>
 </template>
 
-<style>
-/*@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}*/
+<style scoped>
+.about {
+  color: black;
+}
+h1{
+  color:black;
+}
 </style>

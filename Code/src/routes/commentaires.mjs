@@ -116,7 +116,7 @@ commentairesRouter.get("/livre/:livreId/moyenneA", (req, res) => { // Récupére
       const moyenneFormatted = moyenneAppreciation.toFixed(1);
 
       const message = `La moyenne des appréciations pour le livre dont l'id vaut ${req.params.livreId} est ${moyenneFormatted}`;
-      res.json({ message, moyenneAppreciation: parseFloat(moyenneFormatted) });
+      res.json({ message, moyenneAppreciation: parseFloat(moyenneFormatted), nombreAppreciations: commentaires.length });
     })
     .catch((error) => {
       const message =
