@@ -38,10 +38,10 @@ livresRouter.get("/:id", (req, res) => { // Récupérer un livre par son id
 });
 
 // route POST /livres avec authentification
-livresRouter.post("/", auth, (req, res) => { // Créer un livre
+livresRouter.post("/", (req, res) => { // Créer un livre
   Livre.create(req.body)
     .then((createdLivre) => {
-      const message = `Le livre ${createdLivre.name} a bien été créé !`;
+      const message = `Le livre ${createdLivre.titre} a bien été créé !`;
       res.json(success(message, createdLivre));
     })
     .catch((error) => {
