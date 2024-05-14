@@ -1,46 +1,37 @@
-<script>
-import OuvrageRecent from '../Partial/OuvrageRecent.vue'
+<template>
+    <section>
+        <div>
+            <div id="banniere">
+                <Banniere />
+            </div>
+            <div id="recent">
+                <OuvrageRecent />
+            </div>
+        </div>
+    </section>
+</template>
 
-export default{
+<script>
+import Banniere from '../Partial/Banniere.vue'  
+import OuvrageRecent from '../Partial/OuvrageRecent.vue'
+export default {
+  name: 'Home',
     components: {
+        Banniere,
         OuvrageRecent
     }
 }
 </script>
 
-<template>
-  <section>
-    <div id="banniere">
-        <div id="rec1"></div>
-        <div id="rec2">
-            <p id="text1">Qui sommes-nous?</p>
-            <p id="text2">Ce site offre une plateforme conviviale pour les passionnés de lecture. Les utilisateurs peuvent découvrir de nouveaux ouvrages, ajouter, modifier ou supprimer des livres, et partager leurs appréciations.</p>
-        </div>
-        <div id="rec3"></div>
-    </div>
-    <OuvrageRecent />
-    <!-- <Footer /> -->
-  </section>
-</template>
-
 <style scoped>
+section{
+    background-color: #739AAF;
+}
 #banniere{
-    display: grid;
-    grid-template-columns: 5fr 4fr 5fr;
+    margin-top: 81px;
+    width: 100%;
 }
-#rec1, #rec2, #rec3 {
-  height: 320px; 
-}
-#rec1, #rec3{
-    background-color: #269968;
-}
-#rec2{
-    height: 300px;
-    background-color: #4BCC95;
-    padding-left: 20px;
-    padding-top: 20px;
-    padding-right: 20px;
-    text-align: justify;
-    text-align: center;
+#recent{
+    width: 100%;
 }
 </style>
