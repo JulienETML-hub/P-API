@@ -15,8 +15,9 @@ export default {
 <template>
   <div>
     <Header />
-    <Home />
+    <RouterView></RouterView>
     <Footer />
+
   </div>
 </template>
 
@@ -29,13 +30,16 @@ export default {
   color: #050505;
   text-decoration: none;
 }
+
 nav {
   padding: 30px;
 }
+
 nav a {
   font-weight: bold;
   color: #2c3e50;
 }
+
 nav a.router-link-exact-active {
   color: #42b982;
 }
