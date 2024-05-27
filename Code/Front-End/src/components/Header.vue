@@ -6,7 +6,8 @@
             <img class="header-image" :src="logoBar">
         </div>
         <nav>
-            
+            <RouterLink to="/">Accueil</RouterLink>
+            <RouterLink to="/books">Livres</RouterLink>
         </nav>
     </header>
 </template>
@@ -30,8 +31,6 @@ export default {
         background-color: #64A9CE;
         padding: 10px;
         text-align:left;
-    }
-    .image-container {
     }
     .header-image {
         height: 100px;
