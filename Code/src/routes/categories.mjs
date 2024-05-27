@@ -11,7 +11,7 @@ import { livres } from "../db/mockup-livres.mjs";
 const categoriesRouter = express();
 
 // route GET /categories avec l'authentification
-categoriesRouter.get("/", auth, (req, res) => { // Récupérer toutes les catégories
+categoriesRouter.get("/", (req, res) => { // Récupérer toutes les catégories
   Categories.findAll()
     .then((Categories) => {
       const message = "La liste des catégories a bien été récupérée.";
