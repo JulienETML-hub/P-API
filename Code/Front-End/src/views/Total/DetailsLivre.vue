@@ -15,7 +15,7 @@ export default {
       moyenneA: null,
       comment: null,
       livreId: null,
-      authors: null
+      auteurs: null
     }
   },
   async mounted() {
@@ -63,11 +63,10 @@ export default {
           `http://localhost:3000/api/auteurs/${authorID}`
 
         )
-        this.authors = response.data
-
+        this.auteurs = response.data
       } catch (error) {
-        console.error('Erreur lors de la récupération des auteurs :', error)
-
+        console.error('Erreur lors de la récupération des auteuddrs :', error)
+        this.auteurs = `noAuteur`
       }
     },
 
@@ -111,12 +110,12 @@ export default {
         <li v-for="livre in livres" :key="livre.idLivre">
           <!-- Afficher chaque propriété du livre si elle a une valeur -->
           <p v-if="livre.titre">Titre : {{ livre.titre }}</p>
-          <p v-if="livre.extrait">Auteur : {{ authors.data.nom}} {{ authors.data.prenom }}</p>
+          <p v-if="livre.extrait">Auteur :{{ auteurs.data.prenom }} {{ auteurs.data.nom }} </p>
           <p v-if="livre.anneeEdition">Année d'édition : {{ livre.anneeEdition }}</p>
           <p v-if="livre.nbPage">Nombre de page : {{ livre.nbPage }}</p>
         </li>
       </ul>
-      
+
     </div>
 
     <div class="partie2" v-for="livre in livres" :key="livre.idLivre">
@@ -135,7 +134,7 @@ export default {
           <span class="validity"></span>
         </div>
         <div>
-          <input type="submit" value="Rechercher"/>
+          <input type="submit" value="Rechercher" />
         </div>
       </form>
     </div>
@@ -196,13 +195,23 @@ h3 {
   text-align: left;
   margin: auto;
 }
-.partie1 input, h2,h3,h4,p,ul, form{
 
-  margin:auto;
+.partie1 input,
+h2,
+h3,
+h4,
+p,
+ul,
+form {
+
+  margin: auto;
 }
-.partie form div, input{
-  margin:auto;
+
+.partie form div,
+input {
+  margin: auto;
 }
+
 .partie1 p {
   color: white;
   font-size: medium;
@@ -210,7 +219,7 @@ h3 {
 
 .partie2 p {
   grid-area: partiep;
-  display:grid;
+  display: grid;
   margin: auto;
   width: 33%;
   grid-template-areas: 'partiep' 'partiea' 'partieform';
@@ -218,12 +227,28 @@ h3 {
 
 .partie2 a {
   grid-area: partiea;
-  background-color: green;
-  color: white;
+  text-decoration: underline;
+  color: #007bff;
   font-size: large;
+  display: block;
+  text-align: center;
+  margin-top: 1%;
 }
-.partie2 form{
+
+.partie2 form {
+  margin-top: 10%;
   grid-area: partieform;
+  display: block;
+  text-align: center;
+}
+
+.partie2 form label {
+  display: block;
+}
+
+.partie2 form input {
+  width: 30%;
+  margin-top: 2%;
 }
 
 .partie3 p {
