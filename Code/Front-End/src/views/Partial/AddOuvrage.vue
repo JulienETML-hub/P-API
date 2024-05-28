@@ -22,8 +22,10 @@ export default {
                 id_categorie: this.categorie,
                 extrait: this.extrait,
                 resume: this.resume,
+                nbPage: this.nbPage,
                 anneeEdition: this.anneeEdition,
                 imageCouverture: this.imageCouverture,
+
             })
             console.log(response)
         },
