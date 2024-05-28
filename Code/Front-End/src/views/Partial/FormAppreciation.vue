@@ -72,7 +72,9 @@ div {
   background-color: rgb(77, 122, 73);
   border-radius: 10px;
   width: 80%;
-  height: 50%;
+ max-height: 70%;
+ min-height: 50%;
+
   margin: auto;
 }
 div input,
@@ -80,7 +82,7 @@ div input,
   background-color: rgb(169, 194, 167);
   display: block;
   margin: 20px auto 10px auto;
-  width: 30%;
+  width: 60%;
   padding: 2%;
   border: none;
 }
@@ -101,6 +103,7 @@ h3 {
     'Helvetica Neue',
     sans-serif;
   padding-top: 5%;
+  text-align: center;
 }
 textarea {
   display: block;

@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import DetailsLivre from '../views/Total/DetailsLivre.vue';
-import AboutView from '../views/Total/AboutView.vue';
+import AboutView from '../views/Total/addLivre.vue';
 import Home from '../views/Total/Home.vue';
 import loginPage from '../views/Total/loginPage.vue';
 import BookList from '../views/Partial/BookList.vue';
@@ -21,8 +21,8 @@ const router = createRouter({
       component: DetailsLivre
     },
     {
-      path: '/about',
-      name: 'AboutView',
+      path: '/addLivre',
+      name: 'addLivre',
       component: AboutView
     },
     {

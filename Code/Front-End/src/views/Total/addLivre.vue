@@ -8,7 +8,7 @@ export default {
   },
   data() {
     return {
-      test:null,
+      test: null,
     }
   }
 }
@@ -16,8 +16,7 @@ export default {
 </script>
 
 <template>
-  <div class="about">
-    <h1>A site for events to better the world.</h1>
+  <div class="addLivre">
     <AddOuvrage></AddOuvrage>
   </div>
 </template>
@@ -26,7 +25,8 @@ export default {
 .about {
   color: black;
 }
-h1{
-  color:black;
+
+h1 {
+  color: black;
 }
 </style>

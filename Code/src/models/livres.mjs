@@ -74,6 +74,14 @@ const livreModel = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      idAuteur: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      nbPage: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      }
 
     },
     {

@@ -24,7 +24,7 @@ auteursRouter.get("/", (req, res) => { // Récupérer tous les auteurs
 });
 
 // route GET /auteurs/:id avec l'authentification
-auteursRouter.get("/:id", auth, (req, res) => { // Récupérer un auteur
+auteursRouter.get("/:id", (req, res) => { // Récupérer un auteur
   Auteur.findByPk(req.params.id)
     .then((auteur) => {
       if (auteur === null) {
