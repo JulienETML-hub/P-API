@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="book">
     <h1>Liste des Livres</h1>
     <div v-for="category in categories" :key="category.idCategorie">
       <h2>{{ category.nom }}</h2>
@@ -68,6 +68,10 @@ export default {
 </script>
 
 <style scoped>
+.book{
+  background-color: #739AAF;
+  padding: 10px;
+}
 .book-list {
   display: flex;
   flex-wrap: wrap;
