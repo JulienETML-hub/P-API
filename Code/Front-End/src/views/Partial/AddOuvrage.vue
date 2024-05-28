@@ -22,7 +22,7 @@ export default {
                 id_categorie: this.categorie,
                 extrait: this.extrait,
                 resume: this.resume,
-                nbPage: this.nbPage,
+                nbPage: this.nbPages,
                 anneeEdition: this.anneeEdition,
                 imageCouverture: this.imageCouverture,
 

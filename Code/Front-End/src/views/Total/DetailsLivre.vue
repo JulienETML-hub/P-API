@@ -14,13 +14,15 @@ export default {
       commentaires: null,
       moyenneA: null,
       comment: null,
-      livreId: null
+      livreId: null,
+      authors: null
     }
   },
   async mounted() {
     console.log(this.livreId)
     await this.getLivres();
     //await this.getBooksById(this.livreId)
+
   },
   methods: {
     async getBooksById(id) {
@@ -33,6 +35,7 @@ export default {
           console.log('bbbb');
         }*/
         await this.getComments(id)
+        await this.getAuthors(id)
       } catch (error) {
         console.error('Erreur lors de la récupération des livres :', error)
       }
@@ -54,6 +57,21 @@ export default {
         this.moyenneA = `noMoyenne`
       }
     },
+    async getAuthors(authorID) {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/auteurs/${authorID}`
+
+        )
+        this.authors = response.data
+
+      } catch (error) {
+        console.error('Erreur lors de la récupération des auteurs :', error)
+
+      }
+    },
+
+
     async SelectionLivre(event) {
       event.preventDefault()
       this.getBooksById(this._idLivre)
@@ -81,26 +99,34 @@ export default {
         <span class="validity"></span>
       </div>
       <div>
-        <input type="submit" />
+        <input type="submit" value="Rechercher">
       </div>
     </form>
   </div>
   <section v-if="livres">
     <div class="partie1">
       <img class="imgCouverture" :src="livres?.data?.imageCouverture" alt="Image de couverture du livre" />
-      <h3>Informations :</h3>
+      <h3>Informations</h3>
       <ul>
         <li v-for="livre in livres" :key="livre.idLivre">
           <!-- Afficher chaque propriété du livre si elle a une valeur -->
           <p v-if="livre.titre">Titre : {{ livre.titre }}</p>
+          <p v-if="livre.extrait">Auteur : {{ authors.data.nom}} {{ authors.data.prenom }}</p>
           <p v-if="livre.anneeEdition">Année d'édition : {{ livre.anneeEdition }}</p>
           <p v-if="livre.nbPage">Nombre de page : {{ livre.nbPage }}</p>
-          <p v-if="livre.resume">Auteur : {{ livre.author }}</p>
         </li>
       </ul>
+      
+    </div>
+
+    <div class="partie2" v-for="livre in livres" :key="livre.idLivre">
+      <h2>Résumé</h2>
+      <p>{{ livres.data.resume }}</p>
+
+      <a :href="livres?.data?.extrait" target="_blank">Extrait</a>
       <form @submit="SelectionLivre">
         <div>
-          <label for="_idLivre">ID livre : </label>
+          <label for="_idLivre">Sélectionnez un livre</label>
           <select v-model="_idLivre">
             <option v-for="livre in allLivres" :key="livre.idLivre" :value="livre.idLivre">
               {{ livre.titre }}
@@ -109,17 +135,12 @@ export default {
           <span class="validity"></span>
         </div>
         <div>
-          <input type="submit" />
+          <input type="submit" value="Rechercher"/>
         </div>
       </form>
     </div>
 
-    <div class="partie2" v-for="livre in livres" :key="livre.idLivre">
-      <h2>Résumé</h2>
-      <p>{{ livres.data.resume }}</p>
 
-      <a :href="livres?.data?.extrait" target="_blank">Extrait</a>
-    </div>
     <div v-if="commentaires" class="partie3" v-for="commentaire in commentaires" :key="commentaire.idCommentaire">
       <h2>Appréciations des lecteurs</h2>
       <p v-if="moyenneA.moyenneAppreciation != null"> Note moyenne : {{ moyenneA.moyenneAppreciation }} avec {{
@@ -175,23 +196,34 @@ h3 {
   text-align: left;
   margin: auto;
 }
+.partie1 input, h2,h3,h4,p,ul, form{
 
+  margin:auto;
+}
+.partie form div, input{
+  margin:auto;
+}
 .partie1 p {
   color: white;
   font-size: medium;
 }
 
 .partie2 p {
+  grid-area: partiep;
+  display:grid;
   margin: auto;
   width: 33%;
+  grid-template-areas: 'partiep' 'partiea' 'partieform';
 }
 
 .partie2 a {
+  grid-area: partiea;
   background-color: green;
   color: white;
   font-size: large;
-  text-align: center;
-  margin: auto;
+}
+.partie2 form{
+  grid-area: partieform;
 }
 
 .partie3 p {
@@ -199,10 +231,11 @@ h3 {
 }
 
 .imgCouverture {
-  min-width: 250px;
-  min-width: 250px;
-  max-width: 380px;
-  max-height: 380px
+  min-width: 320px;
+  min-width: 320px;
+  max-width: 400px;
+  min-height: 300px;
+  max-height: 450px;
 }
 
 .firstSelection {
