@@ -8,6 +8,7 @@ let livres =  // Tableau de livres
     anneeEdition: 1877,
     imageCouverture: "https://cdn.cultura.com/cdn-cgi/image/width=830/media/pim/TITELIVE/14_9782755648041_1_75.jpg",
     id_categorie: 1,
+    idAuteur: 1,
   },
   {
     idLivre: 2,
@@ -17,6 +18,7 @@ let livres =  // Tableau de livres
     anneeEdition: 1925,
     imageCouverture: "../src/assets/LeProces.jpg",
     id_categorie: 2,
+    idAuteur: 2,
   },
   {
     idLivre: 3,
@@ -26,6 +28,7 @@ let livres =  // Tableau de livres
     anneeEdition: 1605,
     imageCouverture: "../src/assets/DonQuichotte.jpg",
     id_categorie: 3,
+    idAuteur: 3,
   },
   {
     idLivre: 4,
@@ -35,6 +38,7 @@ let livres =  // Tableau de livres
     anneeEdition: 1844,
     imageCouverture: "../src/assets/Monte-Cristo.jpg",
     id_categorie: 5,
+    idAuteur: 4,
   },
   {
     idLivre: 5,
@@ -44,6 +48,7 @@ let livres =  // Tableau de livres
     anneeEdition: 1880,
     imageCouverture: "../src/assets/Karamazov.jpg",
     id_categorie: 5,
+    idAuteur: 5,
   }
 ]
 

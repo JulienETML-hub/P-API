@@ -8,7 +8,7 @@
           <img class="book-cover" :src="book.imageCouverture" alt="Couverture du livre">
           <div class="book-info">
             <h3>{{ book.titre }}</h3>
-            <!-- Ajoutez ici d'autres informations sur le livre -->
+            <p>{{ findAuthor(book.idAuteur).nom }}</p>
           </div>
         </li>
       </ul>
@@ -30,6 +30,9 @@ export default {
   methods: {
     filteredBooks(idCategorie) {
       return this.books.filter(book => book.id_categorie === idCategorie);
+    },
+    findAuthor(idAuteur) {
+      return this.authors.find(author => author.idAuteur === idAuteur);
     }
   },
   mounted() {
@@ -79,10 +82,6 @@ export default {
   width: 200px;
   height: 300px;
   object-fit: cover; /* This will ensure that the image covers the entire space of the img element without distorting the aspect ratio */
-}
-.book-info {
-  
-  /* Ajoutez ici les styles pour les informations sur le livre */
 }
 h2{
   font-size: 45px;
