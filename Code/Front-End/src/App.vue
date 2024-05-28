@@ -9,6 +9,7 @@ import { RouterView } from 'vue-router'
     <Header />
     <RouterView />
     <Footer />
+
   </div>
 </template>
 
@@ -21,13 +22,16 @@ import { RouterView } from 'vue-router'
   color: #050505;
   text-decoration: none;
 }
+
 nav {
   padding: 30px;
 }
+
 nav a {
   font-weight: bold;
   color: #2c3e50;
 }
+
 nav a.router-link-exact-active {
   color: #42b982;
 }

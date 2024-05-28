@@ -9,6 +9,7 @@ export default {
   },
   data() {
     return {
+      allLivres:[],
       livres: null,
       commentaires: null,
       moyenneA: null,
@@ -18,8 +19,8 @@ export default {
   },
   async mounted() {
     console.log(this.livreId)
-
-    await this.getBooksById(this.livreId)
+    await this.getLivres();
+    //await this.getBooksById(this.livreId)
   },
   methods: {
     async getBooksById(id) {
@@ -56,15 +57,35 @@ export default {
       this.getBooksById(this._idLivre)
       this.livreId = 3
       console.log(this.livreId)
-    }
+    },
+    async getLivres() {
+            const response = await axios.get(`http://localhost:3000/api/livres`)
+            this.allLivres = response.data.data
+        }
   }
 }
 </script>
 
 <template>
-  <section>
+  <div class="firstSelection" v-if="livres ==nul">
+    <form @submit="SelectionLivre">
+        <div>
+          <label for="_idLivre">ID livre : </label>
+          <select v-model="_idLivre">
+                <option v-for="livre in allLivres" :key="livre.idLivre" :value="livre.idLivre">
+                    {{ livre.titre }}
+                </option>
+            </select>
+          <span class="validity"></span>
+        </div>
+        <div>
+          <input type="submit" />
+        </div>
+      </form> 
+  </div>
+  <section v-if="livres">
     <div class="partie1">
-      <img src="../../assets/imageID1.jpg" alt="Image de couverture du livre" />
+      <img class="imgCouverture" :src="livres?.data?.imageCouverture" alt="Image de couverture du livre" />
       <h3>Informations :</h3>
       <ul>
         <li v-for="livre in livres" :key="livre.idLivre">
@@ -78,7 +99,11 @@ export default {
       <form @submit="SelectionLivre">
         <div>
           <label for="_idLivre">ID livre : </label>
-          <input v-model="_idLivre" placeholder="Entrez l'id d'un livre" />
+          <select v-model="_idLivre">
+                <option v-for="livre in allLivres" :key="livre.idLivre" :value="livre.idLivre">
+                    {{ livre.titre }}
+                </option>
+            </select>
           <span class="validity"></span>
         </div>
         <div>
@@ -91,13 +116,14 @@ export default {
       <h2>Résumé</h2>
       <p>{{ livres.data.resume }}</p>
 
-      <a href="https://www.w3schools.com/">Extrait</a>
+      <a :href="livres?.data?.extrait" target="_blank">Extrait</a>
     </div>
     <div class="partie3" v-for="commentaire in commentaires" :key="commentaire.idCommentaire">
       <h2>Appréciations des lecteurs</h2>
-      <p> Note moyenne : {{ moyenneA.moyenneAppreciation }} avec {{ moyenneA.nombreAppreciations }} notes</p>
+      <p v-if="commentaire"> Note moyenne : {{ moyenneA.moyenneAppreciation }} avec {{ moyenneA.nombreAppreciations }}
+        notes</p>
       <FormAppreciation :livreId="livres.data.idLivre"></FormAppreciation>
-      
+
     </div>
   </section>
 </template>
@@ -159,5 +185,67 @@ h3 {
 
 .partie3 p {
   text-decoration: underline;
+}
+
+.imgCouverture {
+  min-width: 250px;
+  min-width: 250px;
+  max-width: 380px;
+  max-height: 380px
+}
+.firstSelection {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form elements styling */
+.firstSelection form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Label styling */
+.firstSelection label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Select and input styling */
+.firstSelection select, input[type="submit"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 90%;
+    box-sizing: border-box;
+}
+
+/* Select styling */
+.firstSelection select {
+    appearance: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Submit button styling */
+.firstSelection input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.firstSelection input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+section input{
+  width: 20%;
 }
 </style>
