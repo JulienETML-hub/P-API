@@ -1,4 +1,4 @@
-<!--<script>
+<!-- <script>
 import axios from 'axios'
 export default {
     components: {
@@ -60,4 +60,4 @@ h1 {
     margin-top: 1%;
 
 }
-</style>-->
+</style> -->

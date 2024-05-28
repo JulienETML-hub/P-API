@@ -1,10 +1,14 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import DetailsLivre from '../views/Total/DetailsLivre.vue'
-import AboutView from '../views/Total/AboutView.vue'
-import Home from '../views/Total/Home.vue'
-import loginPage from '../views/Total/loginPage.vue'
+import { createApp } from 'vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import DetailsLivre from '../views/Total/DetailsLivre.vue';
+import AboutView from '../views/Total/AboutView.vue';
+import Home from '../views/Total/Home.vue';
+import loginPage from '../views/Total/loginPage.vue';
+import BookList from '../views/Partial/BookList.vue';
+
+
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory('/'),
   routes: [
     {
       path: '/',
@@ -25,7 +29,13 @@ const router = createRouter({
       path: '/login',
       name: 'loginPage',
       component: loginPage
+    },
+    {
+      path: '/books',
+      name: 'BookList',
+      component: BookList
     }
   ]
-})
-export default router
+});
+
+export default router;

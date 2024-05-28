@@ -10,7 +10,7 @@ import { Auteur } from "../db/sequelize.mjs";
 const auteursRouter = express();
 
 //route GET /auteurs avec l'authentification
-auteursRouter.get("/", auth, (req, res) => { // Récupérer tous les auteurs
+auteursRouter.get("/", (req, res) => { // Récupérer tous les auteurs
   Auteur.findAll()
     .then((auteurs) => {
       const message = "La liste des auteurs a bien été récupérée.";

@@ -1,21 +1,13 @@
-<script>
-import Header from '../src/components/Header.vue'
-import Home from './views/Total/Home.vue'
-import Footer from '../src/components/Footer.vue'
-
-export default {
-  components: {
-    Header,
-    Home,
-    Footer
-  }
-}
+<script setup>
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
   <div>
     <Header />
-    <RouterView></RouterView>
+    <RouterView />
     <Footer />
 
   </div>
